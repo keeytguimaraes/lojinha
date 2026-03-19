@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lista de vendas</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1>Lista de vendas</h1>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Cliente</th>
+<th>Vendedor</th>
+<th>Quantidade</th>
+<th>Preço</th>
+<th>Data</th>
+</tr>
+
+{% for venda in vendas %}
+
+<tr>
+<td>{{ venda.id }}</td>
+<td>{{ venda.cliente }}</td>
+<td>{{ venda.vendedor }}</td>
+<td>{{ venda.quantidade_vendas }}</td>
+<td>{{ venda.preco }}</td>
+<td>{{ venda.data }}</td>
+</tr>
+
+<td>
+    <a href="{{ url_for('vendas.excluir_venda', id=venda.id) }}">
+        <button>Excluir</button>
+    </a>
+    </td>
+    
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<div class="voltar">
+    <a href="/">
+        <button>Voltar</button>
+    </a>
+</div>
+</body>
+</html>

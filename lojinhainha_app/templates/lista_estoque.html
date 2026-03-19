@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Estoque</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1>Estoque</h1>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Quantidade</th>
+<th>Preço</th>
+<th>Vendedor</th>
+</tr>
+
+{% for item in estoque %}
+
+<tr>
+
+<td>{{ item.id }}</td>
+<td>{{ item.quantidade_calcas }}</td>
+<td>{{ item.preco_venda }}</td>
+<td>{{ item.nome }}</td>
+
+<td>
+    <a href="{{ url_for('estoque.excluir_estoque', id=item.id) }}">
+        <button>Excluir</button>
+    </a>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<div class="voltar">
+    <a href="/">
+        <button>Voltar</button>
+    </a>
+</div>
+
+</body>
+</html>

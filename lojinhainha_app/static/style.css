@@ -1,0 +1,110 @@
+body{
+    display:flex;
+    margin:0;
+}
+
+/* MENU LATERAL */
+
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#2e7d32;
+    padding:20px;
+    color:white;
+    position:fixed;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    padding:10px;
+    margin:5px 0;
+    border-radius:5px;
+}
+
+.sidebar a:hover{
+    background:#1b5e20;
+}
+
+/* CONTEUDO */
+
+.content{
+    margin-left:220px;
+    padding:40px;
+    background:#f5f5f5;
+    width:100%;
+    min-height:100vh;
+}
+
+/* 🔥 IMPORTANTE PRA TABELA */
+.conteudo-tabela{
+    display:flex;
+    flex-direction:column;
+}
+
+/* CARDS */
+
+.card{
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.card:hover{
+    transform:scale(1.03);
+}
+
+/* TABELA */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th {
+    background-color: #2e7d32;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* BOTÃO */
+
+button {
+    background-color: #d32f2f;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b71c1c;
+}
+
+/* ✅ BOTÃO VOLTAR */
+
+.voltar {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+}

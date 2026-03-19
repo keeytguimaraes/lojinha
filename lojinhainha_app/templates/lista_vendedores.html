@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Vendedores</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1>Lista de vendedores</h1>
+
+<table>
+
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>CPF</th>
+<th>Quantidade vendas</th>
+</tr>
+
+{% for vendedor in vendedores %}
+
+<tr>
+
+<td>{{ vendedor.id }}</td>
+<td>{{ vendedor.nome }}</td>
+<td>{{ vendedor.cpf}}</td>
+<td>{{ vendedor.quantidade_vendas }}</td>
+
+<td>
+    <a href="{{ url_for('vendedor.excluir_vendedor', id=vendedor.id) }}">
+        <button>Excluir</button>
+    </a>
+    </td>
+    
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<div class="voltar">
+    <a href="/">
+        <button>Voltar</button>
+    </a>
+</div>
+<!-- <a href="{{ url_for('cliente.index') }}">Voltar</a> -->
+
+</body>
+</html>

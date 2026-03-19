@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+
+<h2 class="mb-4">Página inicial</h2>
+
+<div class="row g-4">
+
+<div class="col-md-4">
+<a href="/cadastro_cliente">
+<div class="card text-center p-4 shadow">
+<h5>Cadastrar Cliente</h5>
+</div>
+</a>
+</div>
+
+<div class="col-md-4">
+<a href="/fornecedores">
+<div class="card text-center p-4 shadow">
+<h5>Cadastrar Fornecedor</h5>
+</div>
+</a>
+</div>
+
+<div class="col-md-4">
+<a href="/vendedores">
+<div class="card text-center p-4 shadow">
+<h5>Cadastrar Vendedor</h5>
+</div>
+</a>
+</div>
+
+<div class="col-md-4">
+<a href="/estoque">
+<div class="card text-center p-4 shadow">
+<h5>Cadastrar Produto</h5>
+</div>
+</a>
+</div>
+
+<div class="col-md-4">
+<a href="/vendas">
+<div class="card text-center p-4 shadow bg-success text-white">
+<h5>Registrar Venda</h5>
+</div>
+</a>
+</div>
+
+</div>
+
+{% endblock %}
