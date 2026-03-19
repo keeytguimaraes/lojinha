@@ -1,66 +1,41 @@
 from flask import Blueprint, render_template, request, redirect
-import mysql.connector
+from models.estoque_model import (
+    listar_vendedores,
+    inserir_estoque,
+    listar_estoque,
+    excluir_estoque
+)
 
 estoque_bp = Blueprint("estoque", __name__)
 
-# conexão com banco
-db = mysql.connector.connect(
-    host="localhost",
-    user="root",
-    password="",
-    database="lojinhainha"
-)
 
-cursor = db.cursor(dictionary=True)
-
-# abrir página de cadastro
 @estoque_bp.route("/estoque")
 def estoque():
-
-    # pegar vendedores
-    cursor.execute("SELECT id, nome FROM vendedor")
-    vendedores = cursor.fetchall()
-
+    vendedores = listar_vendedores()
     return render_template("estoque.html", vendedores=vendedores)
 
 
-# adicionar estoque
 @estoque_bp.route("/add_estoque", methods=["POST"])
 def add_estoque():
 
-    quantidade = request.form['quantidade_calcas']
-    preco = request.form['preco_venda']
-    vendedor_id = request.form['vendedor_id']
-
-    cursor.execute(
-        "INSERT INTO estoque (quantidade_calcas, preco_venda, vendedor_id) VALUES (%s,%s,%s)",
-        (quantidade, preco, vendedor_id)
+    inserir_estoque(
+        request.form['quantidade_calcas'],
+        request.form['preco_venda'],
+        request.form['vendedor_id']
     )
-
-    db.commit()
 
     return redirect("/lista_estoque")
 
 
-# listar estoque
 @estoque_bp.route("/lista_estoque")
-def lista_estoque():
+def lista():
+    dados = listar_estoque()
+    return render_template("lista_estoque.html", estoque=dados)
 
-    cursor.execute("""
-    SELECT e.id, e.quantidade_calcas, e.preco_venda, v.nome
-    FROM estoque e
-    JOIN vendedor v ON e.vendedor_id = v.id
-    """)
 
-    estoque = cursor.fetchall()
-
-    return render_template("lista_estoque.html", estoque=estoque)
-    
-    # excluir produto do estoque
 @estoque_bp.route("/excluir_estoque/<int:id>")
-def excluir_estoque(id):
+def excluir_estoque_route(id):
 
-    cursor.execute("DELETE FROM estoque WHERE id = %s", (id,))
-    db.commit()
+    excluir_estoque(id)  # CHAMA O MODEL
 
     return redirect("/lista_estoque")

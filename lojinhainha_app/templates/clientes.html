@@ -34,9 +34,9 @@
         <td>{{ cliente.complemento }}</td>
         
         <td>
-            <a href="{{ url_for('cliente.excluir_cliente', id=cliente.id) }}">
-        <button>Excluir</button>
-        </a>
+            <a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}">
+                Excluir
+            </a>
         </td>
         
         </tr>
