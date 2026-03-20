@@ -1,56 +1,32 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Lista de Clientes</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <h1>Clientes</h1>
-    <table>
+{% extends 'base.html' %}
 
-        <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>CPF</th>
-        <th>Cidade</th>
-        <th>Rua</th>
-        <th>Bairro</th>
-        <th>Número</th>
-        <th>Complemento</th>
-        <th>Ações</th>
-        </tr>
-        
-        {% for cliente in clientes %}
-        
-        <tr>
-        <td>{{ cliente.id }}</td>
-        <td>{{ cliente.nome }}</td>
-        <td>{{ cliente.cpf }}</td>
-        <td>{{ cliente.cidade }}</td>
-        <td>{{ cliente.rua }}</td>
-        <td>{{ cliente.bairro }}</td>
-        <td>{{ cliente.numero }}</td>
-        <td>{{ cliente.complemento }}</td>
-        
-        <td>
-            <a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}">
-                Excluir
-            </a>
-        </td>
-        
-        </tr>
-        
-        {% endfor %}
-        
-    </table>
+{% block conteudo %}
 
-    <br>
-    
-    <div class="voltar">
-        <a href="/">
-            <button>Voltar</button>
-        </a>
-    </div>
-    </body>
-    </html>
+<h2>Clientes</h2>
+
+<table>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>CPF</th>
+<th>Cidade</th>
+<th>Ações</th>
+</tr>
+
+{% for cliente in clientes %}
+<tr>
+<td>{{ cliente.id }}</td>
+<td>{{ cliente.nome }}</td>
+<td>{{ cliente.cpf }}</td>
+<td>{{ cliente.cidade }}</td>
+<td>
+<a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}">
+<button>Excluir</button>
+</a>
+</td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

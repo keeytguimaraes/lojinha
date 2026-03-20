@@ -1,40 +1,27 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Cadastrar Cliente</title>
-<link rel="stylesheet" href="/static/style.css">
-</head>
+{% extends 'base.html' %}
 
-<body>
+{% block conteudo %}
 
-<h1>Cadastrar Cliente</h1>
+<h2>Cadastrar Cliente</h2>
+
+<div class="form-container">
 
 <form action="/add_cliente" method="POST">
 
 <input type="text" name="nome" placeholder="Nome do cliente" required>
+<input type="text" name="cpf" placeholder="CPF" required>
 
-<input type="number" name="cpf" placeholder="CPF" required>
-
-<h2>Endereço do cliente</h2>
+<h5>Endereço</h5>
 
 <input type="text" name="cidade" placeholder="Cidade" required>
-
 <input type="text" name="rua" placeholder="Rua" required>
-
 <input type="text" name="bairro" placeholder="Bairro" required>
-
 <input type="number" name="numero" placeholder="Número" required>
-
-<input type="text" name="complemento" placeholder="Complemento">
 
 <button type="submit">Cadastrar</button>
 
 </form>
 
-<br>
+</div>
 
-<a href="/">Voltar</a>
-
-</body>
-</html>
+{% endblock %}

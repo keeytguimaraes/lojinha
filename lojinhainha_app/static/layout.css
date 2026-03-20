@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background-color: #f4f6f9;
+}
+
+/* 🔵 SIDEBAR */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #7d2686;
+    color: white;
+    position: fixed;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(8, 8, 8, 0.749);
+}
+
+.sidebar h4 {
+    text-align: center;
+}
+
+.sidebar a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(8, 8, 8, 0.58);
+}
+
+.sidebar a:hover {
+    background: #7d2686;
+}
+
+/* 🟢 CONTEÚDO */
+.content {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+/* 📊 TABELAS */
+table {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+th {
+    background: #7c2586;
+    color: white;
+    padding: 10px;
+}
+
+td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 🧾 FORMULÁRIOS */
+.form-container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+}
+
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* 🔘 BOTÕES */
+button {
+    padding: 10px;
+    border: none;
+    background: #7e1c89d2;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #c662d1;
+}

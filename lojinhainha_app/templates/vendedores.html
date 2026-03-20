@@ -1,20 +1,21 @@
-<h1>Cadastrar vendedor</h1>
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h2>Cadastrar Vendedor</h2>
+
+<div class="form-container">
 
 <form action="/add_vendedor" method="POST">
 
-<input type="text" name="nome" placeholder="Nome do vendedor" required>
-
-<input type="number" name="quantidade_vendas" placeholder="Quantidade de vendas">
-
+<input type="text" name="nome" placeholder="Nome" required>
 <input type="text" name="cpf" placeholder="CPF" required>
+<input type="number" name="quantidade_vendas" placeholder="Quantidade">
 
 <button type="submit">Cadastrar</button>
 
 </form>
 
-<br>
+</div>
 
-<a href="/">Voltar</a>
-
-</body>
-</html>
+{% endblock %}

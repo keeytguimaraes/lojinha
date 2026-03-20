@@ -1,51 +1,51 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Lojinhainha</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
 
-{% block conteudo %}
+<body>
 
-<h2 class="mb-4">Página inicial</h2>
+<!-- 🔵 MENU SUPERIOR -->
+<div class="top-bar">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
 
-<div class="row g-4">
-
-<div class="col-md-4">
-<a href="/cadastro_cliente">
-<div class="card text-center p-4 shadow">
-<h5>Cadastrar Cliente</h5>
-</div>
-</a>
-</div>
-
-<div class="col-md-4">
-<a href="/fornecedores">
-<div class="card text-center p-4 shadow">
-<h5>Cadastrar Fornecedor</h5>
-</div>
-</a>
-</div>
-
-<div class="col-md-4">
-<a href="/vendedores">
-<div class="card text-center p-4 shadow">
-<h5>Cadastrar Vendedor</h5>
-</div>
-</a>
+    <div id="menu" class="menu">
+        <a href="/clientes">Clientes</a>
+        <a href="/lista_vendedores">Vendedores</a>
+        <a href="/lista_estoque">Estoque</a>
+        <a href="/lista_fornecedores">Fornecedores</a>
+        <a href="/lista_vendas">Vendas</a>
+    </div>
 </div>
 
-<div class="col-md-4">
-<a href="/estoque">
-<div class="card text-center p-4 shadow">
-<h5>Cadastrar Produto</h5>
-</div>
-</a>
+<!-- 🟢 CONTEÚDO PRINCIPAL -->
+<div class="container">
+
+    <h1>Bem-vindo à Lojinhainha 🛍️</h1>
+
+    <p>Gerencie seu sistema de forma simples e rápida</p>
+
+    <div class="botoes">
+
+        <a href="/cadastro_cliente"><button>🧾 Cadastro Cliente</button></a>
+        <a href="/vendedores"><button>👨‍💼 Cadastro Vendedor</button></a>
+        <a href="/estoque"><button>📦 Cadastro Estoque</button></a>
+        <a href="/fornecedores"><button>🏢 Cadastro Fornecedor</button></a>
+        <a href="/vendas"><button>💰 Registrar Venda</button></a>
+    
+    </div>
+    
 </div>
 
-<div class="col-md-4">
-<a href="/vendas">
-<div class="card text-center p-4 shadow bg-success text-white">
-<h5>Registrar Venda</h5>
-</div>
-</a>
-</div>
+<script>
+function toggleMenu() {
+    var menu = document.getElementById("menu");
+    menu.classList.toggle("show");
+}
+</script>
 
-</div>
-
-{% endblock %}
+</body>
+</html>
