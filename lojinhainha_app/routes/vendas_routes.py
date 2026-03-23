@@ -54,3 +54,16 @@ def atualizar_venda_route(id):
         request.form["preco"]
     )
     return redirect("/lista_vendas")
+
+# Autocomplete de clientes para o formulário de vendas
+@vendas_bp.route("/clientes_autocomplete")
+def clientes_autocomplete():
+    query = request.args.get("q", "")  # pega o que o usuário digitou
+    clientes = listar_clientes()  # já retorna todos os clientes do banco
+    # filtra apenas os que combinam com o texto digitado
+    resultados = [
+        {"id": c["id"], "nome": c["nome"], "cpf": c["cpf"]}
+        for c in clientes
+        if query.lower() in c["nome"].lower()
+    ]
+    return resultados  # Flask transforma dict/list em JSON automaticamente

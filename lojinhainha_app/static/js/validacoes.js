@@ -76,7 +76,6 @@ window.toggleSection = function(id) {
         }
     }
 };
-
 // 🔹 RESTAURAR ESTADO AO CARREGAR
 document.addEventListener("DOMContentLoaded", function () {
     ["tabelas", "cadastros"].forEach(function(id) {
