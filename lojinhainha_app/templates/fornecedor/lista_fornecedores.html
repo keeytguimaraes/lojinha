@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para listar todos os fornecedores -->
+
+<h2>Fornecedores</h2>
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Empresa</th>
+    <th>CNPJ</th>
+    <th>Quantidade</th>
+    <th>Preço</th>
+    <th>Ações</th>
+</tr>
+
+{% for fornecedor in fornecedores %}
+<tr>
+    <td>{{ fornecedor.id }}</td>
+    <td>{{ fornecedor.nome_empresa }}</td>
+    <td>{{ fornecedor.cnpj }}</td>
+    <td>{{ fornecedor.produto_quantidade }}</td>
+    <td>{{ fornecedor.preco }}</td>
+    <td>
+        <a href="{{ url_for('fornecedor.excluir_fornecedor_route', id=fornecedor.id) }}">
+            <button>Excluir</button>
+        </a>
+        <a href="{{ url_for('fornecedor.editar_fornecedor', id=fornecedor.id) }}">
+            <button>Alterar</button>
+        </a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

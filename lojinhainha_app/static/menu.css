@@ -8,6 +8,17 @@
     z-index: 1000;
         color: white; /* 👈 muda a cor */
 }
+.btn-voltar {
+    position: fixed;
+    top: 70px;
+    left: 20px;
+    background: #7c2586;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    z-index: 2000; /* MAIS ALTO QUE TUDO */
+}
 
 .sidebar a:hover {
     background-color: #c662d1;
@@ -26,6 +37,7 @@
     top: 0;
     padding: 20px;
     transition: 0.3s;
+    overflow-y: auto;
 }
 
 /* SIDEBAR ATIVA */
@@ -35,7 +47,7 @@
 
 /* TOPBAR */
 .topbar {
-    position: fixed;   /* 👈 ISSO RESOLVE */
+    position: fixed;  
     top: 0;
     left: 0;
     width: 100%;
@@ -63,4 +75,13 @@
 /* EMPURRA CONTEÚDO */
 .content.shift {
     margin-left: 220px;
+}
+/* REMOVE QUALQUER LINHA ROXA / FOCO */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #ccc !important;
 }

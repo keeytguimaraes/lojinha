@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para cadastrar um novo cliente -->
+
+<h2>Cadastrar Cliente</h2>
+
+<div class="form-container">
+    <form action="/add_cliente" method="POST">
+        <!-- Dados do cliente -->
+        <input type="text" name="nome" placeholder="Nome do cliente" required>
+        <input type="text" name="cpf" placeholder="CPF" required>
+
+        <h5>Endereço</h5>
+        <!-- Dados do endereço -->
+        <input type="text" name="cidade" placeholder="Cidade" required>
+        <input type="text" name="rua" placeholder="Rua" required>
+        <input type="text" name="bairro" placeholder="Bairro" required>
+        <input type="number" name="numero" placeholder="Número" required>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+
+{% endblock %}

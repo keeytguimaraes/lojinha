@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<title>Lojinhainha</title>
-<link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <title>Lojinhainha</title>
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
-
-<!-- 🔵 MENU SUPERIOR -->
-<div class="top-bar">
-    <div class="menu-icon" onclick="toggleMenu()">☰</div>
-
-    <div id="menu" class="menu">
-        <a href="/clientes">Clientes</a>
-        <a href="/lista_vendedores">Vendedores</a>
-        <a href="/lista_estoque">Estoque</a>
-        <a href="/lista_fornecedores">Fornecedores</a>
-        <a href="/lista_vendas">Vendas</a>
+    <!-- 🔵 MENU SUPERIOR -->
+    <div class="top-bar">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div id="menu" class="menu">
+            <!-- Links rápidos para tabelas -->
+            <a href="/clientes">Clientes</a>
+            <a href="/lista_vendedores">Vendedores</a>
+            <a href="/lista_estoque">Estoque</a>
+            <a href="/lista_fornecedores">Fornecedores</a>
+            <a href="/lista_vendas">Vendas</a>
+        </div>
     </div>
-</div>
 
-<!-- 🟢 CONTEÚDO PRINCIPAL -->
-<div class="container">
+    <!-- 🟢 CONTEÚDO PRINCIPAL -->
+    <div class="container">
+        <h1>Bem-vindo à Lojinhainha 🛍️</h1>
+        <p>Gerencie seu sistema de forma simples e rápida</p>
 
-    <h1>Bem-vindo à Lojinhainha 🛍️</h1>
-
-    <p>Gerencie seu sistema de forma simples e rápida</p>
-
-    <div class="botoes">
-
-        <a href="/cadastro_cliente"><button>🧾 Cadastro Cliente</button></a>
-        <a href="/vendedores"><button>👨‍💼 Cadastro Vendedor</button></a>
-        <a href="/estoque"><button>📦 Cadastro Estoque</button></a>
-        <a href="/fornecedores"><button>🏢 Cadastro Fornecedor</button></a>
-        <a href="/vendas"><button>💰 Registrar Venda</button></a>
-    
+        <div class="botoes">
+            <!-- Botões para acesso rápido aos cadastros e registros -->
+            <a href="/cadastro_cliente"><button>🧾 Cadastro Cliente</button></a>
+            <a href="/vendedores"><button>👨‍💼 Cadastro Vendedor</button></a>
+            <a href="/estoque"><button>📦 Cadastro Estoque</button></a>
+            <a href="/fornecedores"><button>🏢 Cadastro Fornecedor</button></a>
+            <a href="/vendas"><button>💰 Registrar Venda</button></a>
+        </div>
     </div>
-    
-</div>
 
-<script>
-function toggleMenu() {
-    var menu = document.getElementById("menu");
-    menu.classList.toggle("show");
-}
-</script>
-
+    <!-- SCRIPT PARA ABRIR/FECHAR MENU -->
+    <script>
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("show");
+        }
+    </script>
 </body>
 </html>

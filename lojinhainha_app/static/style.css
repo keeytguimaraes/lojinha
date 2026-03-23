@@ -72,3 +72,32 @@ h1 {
 .botoes button:hover {
     background: #c662d1;
 }
+.sugestoes-box {
+    position: absolute;
+    width: 300px; /* 👈 tamanho fixo menor */
+    background: #883891;
+    border-radius: 10px;
+    margin-top: 5px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+/* CADA ITEM */
+.item-sugestao {
+    background: #883891;
+    color: white;
+    padding: 12px;
+    margin: 6px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-weight: 500;
+}
+
+/* HOVER */
+.item-sugestao:hover {
+    background: #c662d1;
+    transform: scale(1.02);
+}

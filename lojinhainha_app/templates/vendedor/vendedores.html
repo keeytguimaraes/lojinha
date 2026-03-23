@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para cadastrar um novo vendedor -->
+
+<h2>Cadastrar Vendedor</h2>
+
+<div class="form-container">
+    <form action="/add_vendedor" method="POST">
+        <!-- Dados do vendedor -->
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="text" name="cpf" placeholder="CPF" required>
+        <input type="number" name="quantidade_vendas" placeholder="Quantidade">
+        
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+
+{% endblock %}

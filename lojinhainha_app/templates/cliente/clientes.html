@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para listar todos os clientes -->
+
+<h2>Clientes</h2>
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>CPF</th>
+    <th>Cidade</th>
+    <th>Rua</th>
+    <th>Bairro</th>
+    <th>Número</th>
+    <th>Ações</th>
+</tr>
+
+{% for cliente in clientes %}
+<tr>
+    <td>{{ cliente.id }}</td>
+    <td>{{ cliente.nome }}</td>
+    <td>{{ cliente.cpf }}</td>
+    <td>{{ cliente.cidade }}</td>
+    <td>{{ cliente.rua }}</td>
+    <td>{{ cliente.bairro }}</td>
+    <td>{{ cliente.numero }}</td>
+    <td>
+        <a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}">
+            <button>Excluir</button>
+        </a>
+        <a href="{{ url_for('cliente.editar_cliente', id=cliente.id) }}">
+            <button>Alterar</button>
+        </a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

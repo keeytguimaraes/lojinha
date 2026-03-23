@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para editar um vendedor existente -->
+
+<h2>Editar Vendedor</h2>
+
+<form method="POST" action="/atualizar_vendedor/{{ vendedor.id }}">
+    <input name="nome" value="{{ vendedor.nome }}" required>
+    <input name="cpf" value="{{ vendedor.cpf }}" required>
+    <input name="quantidade_vendas" value="{{ vendedor.quantidade_vendas }}">
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock %}

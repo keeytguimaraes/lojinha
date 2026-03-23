@@ -1,21 +1,19 @@
 from flask import Blueprint, render_template, request, redirect
-from models.fornecedor_model import (
-    inserir_fornecedor,
-    listar_fornecedores,
-    excluir_fornecedor
-)
+from models.fornecedor.fornecedor_insert import inserir_fornecedor
+from models.fornecedor.fornecedor_select import listar_fornecedores
+from models.fornecedor.fornecedor_update import atualizar_fornecedor
+from models.fornecedor.fornecedor_delete import excluir_fornecedor
 
 fornecedor_bp = Blueprint("fornecedor", __name__)
 
-
+# Tela cadastro fornecedor
 @fornecedor_bp.route("/fornecedores")
 def fornecedores():
-    return render_template("fornecedores.html")
+    return render_template("fornecedor/fornecedores.html")
 
-
+# Inserir fornecedor
 @fornecedor_bp.route("/add_fornecedor", methods=["POST"])
 def add_fornecedor():
-
     inserir_fornecedor(
         request.form['nome_empresa'],
         request.form['cnpj'],
@@ -26,20 +24,34 @@ def add_fornecedor():
         request.form['numero'],
         request.form['cidade']
     )
-
     return redirect("/lista_fornecedores")
 
-
+# Listar fornecedores
 @fornecedor_bp.route("/lista_fornecedores")
 def lista_fornecedores():
+    return render_template("fornecedor/lista_fornecedores.html",
+                           fornecedores=listar_fornecedores())
 
-    dados = listar_fornecedores()
-    return render_template("lista_fornecedores.html", fornecedores=dados)
-
-
+# Excluir fornecedor
 @fornecedor_bp.route("/excluir_fornecedor/<int:id>")
 def excluir_fornecedor_route(id):
+    excluir_fornecedor(id)
+    return redirect("/lista_fornecedores")
 
-    excluir_fornecedor(id)  # CHAMA O MODEL
+# Editar fornecedor
+@fornecedor_bp.route("/editar_fornecedor/<int:id>")
+def editar_fornecedor(id):
+    fornecedor = next((f for f in listar_fornecedores() if f["id"] == id), None)
+    return render_template("fornecedor/editar_fornecedor.html", fornecedor=fornecedor)
 
+# Atualizar fornecedor
+@fornecedor_bp.route("/atualizar_fornecedor/<int:id>", methods=["POST"])
+def atualizar_fornecedor_route(id):
+    atualizar_fornecedor(
+        id,
+        request.form["nome_empresa"],
+        request.form["cnpj"],
+        request.form["produto_quantidade"],
+        request.form["preco"]
+    )
     return redirect("/lista_fornecedores")

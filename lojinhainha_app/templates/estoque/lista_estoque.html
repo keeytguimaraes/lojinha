@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para listar todos os itens do estoque -->
+
+<h2>Estoque</h2>
+
+<table>
+<tr>
+    <th>ID</th>
+    <th>Quantidade</th>
+    <th>Preço</th>
+    <th>Vendedor</th>
+    <th>Ações</th>
+</tr>
+
+{% for item in estoque %}
+<tr>
+    <td>{{ item.id }}</td>
+    <td>{{ item.quantidade_calcas }}</td>
+    <td>{{ item.preco_venda }}</td>
+    <td>{{ item.nome }}</td>
+    <td>
+        <a href="{{ url_for('estoque.excluir_estoque_route', id=item.id) }}">
+            <button>Excluir</button>
+        </a>
+        <a href="{{ url_for('estoque.editar_estoque', id=item.id) }}">
+            <button>Alterar</button>
+        </a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

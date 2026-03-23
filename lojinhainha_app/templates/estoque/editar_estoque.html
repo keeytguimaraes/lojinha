@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para editar um item existente do estoque -->
+
+<h2>Editar Estoque</h2>
+
+<form method="POST" action="/estoque/atualizar_estoque/{{ item.id }}">
+    <!-- Preenchendo com os dados atuais do item -->
+    <input name="quantidade_calcas" value="{{ item.quantidade_calcas }}" required>
+    <input name="preco_venda" value="{{ item.preco_venda }}" required>
+
+    <!-- Seleção do vendedor responsável -->
+    <select name="vendedor_id" required>
+        {% for v in vendedores %}
+        <option value="{{ v.id }}" {% if v.id == item.vendedor_id %}selected{% endif %}>
+            {{ v.nome }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock %}

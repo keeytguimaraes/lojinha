@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para editar os dados de um cliente existente -->
+
+<h2>Editar Cliente</h2>
+
+<form method="POST" action="/atualizar_cliente/{{ cliente.id }}">
+    <input name="nome" value="{{ cliente.nome }}" required>
+    <input name="cpf" value="{{ cliente.cpf }}" required>
+    <input name="cidade" value="{{ cliente.cidade }}" required>
+    <input name="rua" value="{{ cliente.rua }}" required>
+    <input name="bairro" value="{{ cliente.bairro }}" required>
+    <input name="numero" value="{{ cliente.numero }}" required>
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock %}

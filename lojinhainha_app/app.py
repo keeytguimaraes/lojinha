@@ -1,18 +1,30 @@
-from flask import Flask
+from flask import Flask, render_template
 
-from routes.clientes_routes import cliente_bp
+# 🔹 Importando blueprints de cada módulo (entidade)
+from routes.cliente_routes import cliente_bp
 from routes.fornecedor_routes import fornecedor_bp
 from routes.vendedor_routes import vendedor_bp
 from routes.estoque_routes import estoque_bp
 from routes.vendas_routes import vendas_bp
 
+# 🔹 Criando a aplicação Flask
 app = Flask(__name__)
 
+# 🔹 Rota da página inicial
+@app.route("/")
+def index():
+    """
+    Página inicial do sistema.
+    """
+    return render_template("index.html")
+
+#  Registrando os blueprints sem url_prefix
 app.register_blueprint(cliente_bp)
 app.register_blueprint(fornecedor_bp)
 app.register_blueprint(vendedor_bp)
 app.register_blueprint(estoque_bp)
 app.register_blueprint(vendas_bp)
 
+# 🔹 Inicializa a aplicação
 if __name__ == "__main__":
     app.run(debug=True)

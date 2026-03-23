@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para cadastrar um novo item no estoque -->
+
+<h2>Cadastrar Estoque</h2>
+
+<div class="form-container">
+    <form action="/add_estoque" method="POST">
+        <!-- Quantidade de calças -->
+        <input type="number" name="quantidade_calcas" placeholder="Quantidade" required>
+        <!-- Preço de venda -->
+        <input type="number" step="0.01" min="0" name="preco_venda" placeholder="Preço de venda" required>
+        
+        <!-- Seleção de vendedor responsável -->
+        <select name="vendedor_id" required>
+            <option value="">Escolha um vendedor</option>
+            {% for vendedor in vendedores %}
+            <option value="{{ vendedor.id }}">{{ vendedor.nome }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</div>
+
+{% endblock %}

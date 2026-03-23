@@ -1,61 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <meta charset="UTF-8">
+    <title>Lojinhainha</title>
 
-<meta charset="UTF-8">
-<title>Lojinhainha</title>
-
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    <!-- CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='menu.css') }}">
+</head>
 
 <body>
+
+    <!-- 🔹 TOPO -->
     <div class="topbar">
         <div class="menu-btn" onclick="toggleMenu()">☰</div>
         <h4>Lojinhainha</h4>
     </div>
 
-<!-- MENU LATERAL -->
+    <!-- 🔹 MENU LATERAL -->
+    <div class="sidebar" id="sidebar">
+        <h4>Lojinhainha</h4>
+        <hr>
+        <a href="/" class="btn-voltar-sidebar">🏠 Início</a>
+        <hr>
+        <h6 onclick="toggleSection('tabelas')" style="cursor:pointer;">📋 Tabelas</h6>
+        <div id="tabelas">
+            <a href="/clientes">Clientes</a>
+            <a href="/fornecedores">Fornecedores</a>
+            <a href="/vendedores">Vendedores</a>
+            <a href="/estoque">Estoque</a>
+            <a href="/vendas">Vendas</a>
+        </div>
 
-<div class="sidebar" id="sidebar">
+        <hr>
 
-    <h4>Lojinhainha</h4>
-    
-    <hr>
-    
-    <h6>Tabelas</h6>
-    
-    <a href="/">Página inicial</a>
-    <a href="/clientes">Clientes</a>
-    <a href="/lista_fornecedores">Fornecedores</a>
-    <a href="/lista_vendedores">Vendedores</a>
-    <a href="/lista_estoque">Estoque</a>
-    <a href="/lista_vendas">Vendas</a>
-    
+        <h6 onclick="toggleSection('cadastros')" style="cursor:pointer;">➕ Cadastros</h6>
+        <div id="cadastros">
+            <a href="/cadastro_cliente">Cadastrar Cliente</a>
+            <a href="/vendedores">Cadastrar Vendedor</a>
+            <a href="/estoque">Cadastrar Estoque</a>
+            <a href="/fornecedores">Cadastrar Fornecedor</a>
+            <a href="/vendas">Registrar Venda</a>
+        </div>
     </div>
-    
-    <!-- BOTÃO MENU -->
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
 
-<!-- CONTEÚDO DINÂMICO -->
+    <!-- 🔹 CONTEÚDO -->
+    <div class="content" id="content">
+        {% block conteudo %}
+        {% endblock %}
+    </div>
 
-<div class="content" id="content">
-
-{% block conteudo %}
-
-{% endblock %}
-
-</div>
-
-<script>
-    function toggleMenu() {
-        document.getElementById("sidebar").classList.toggle("active");
-        document.getElementById("content").classList.toggle("shift");
-    }
-    </script>
-
+    <!-- 🔹 JS -->
+    <script src="{{ url_for('static', filename='js/validacoes.js') }}"></script>
 
 </body>
 </html>

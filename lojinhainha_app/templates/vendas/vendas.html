@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+<!-- Template para registrar uma nova venda -->
+
+<h2>Registrar Venda</h2>
+
+<div class="form-container">
+    <form action="/add_venda" method="POST">
+        <!-- Seleção do cliente com sugestão automática -->
+        <label>Cliente</label>
+        <input type="text" id="cliente_input" placeholder="Digite o cliente" required>
+        <input type="hidden" name="cliente_id" id="cliente_id">
+        <input type="text" name="cpf" id="cpf" placeholder="CPF" readonly required>
+
+        <!-- Seleção do vendedor -->
+        <select name="vendedor_id" required>
+            <option value="">Vendedor</option>
+            {% for vendedor in vendedores %}
+            <option value="{{ vendedor.id }}">{{ vendedor.nome }}</option>
+            {% endfor %}
+        </select>
+
+        <!-- Dados da venda -->
+        <input type="number" name="quantidade_vendas" placeholder="Quantidade" required>
+        <input type="number" step="0.01" min="0" name="preco" placeholder="Preço" required>
+        <input type="date" name="data" required>
+
+        <button type="submit">Registrar</button>
+    </form>
+</div>
+
+<!-- SCRIPT para sugestão de cliente -->
+<script>
+const clientes = JSON.parse('{{ clientes | tojson | safe }}');
+const input = document.getElementById("cliente_input");
+const sugestoes = document.getElementById("sugestoes");
+
+input.addEventListener("input", function() {
+    let valor = input.value.toLowerCase();
+    sugestoes.innerHTML = "";
+
+    if (valor === "") return;
+
+    let filtrados = clientes.filter(c =>
+        c.nome.toLowerCase().includes(valor)
+    );
+
+    filtrados.forEach(cliente => {
+        let div = document.createElement("div");
+        div.textContent = cliente.nome;
+        div.classList.add("item-sugestao");
+
+        div.onclick = function() {
+            input.value = cliente.nome;
+            document.getElementById("cliente_id").value = cliente.id;
+            document.getElementById("cpf").value = cliente.cpf;
+            sugestoes.innerHTML = "";
+        };
+
+        sugestoes.appendChild(div);
+    });
+});
+</script>
+
+{% endblock %}
