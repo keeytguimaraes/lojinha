@@ -1,6 +1,6 @@
 from database.connection import get_db
 
-def inserir_fornecedor(nome_empresa, cnpj, quantidade, preco, rua, bairro, numero, cidade):
+def inserir_fornecedor(nome_empresa, cnpj, produto_quantidade, preco, rua, bairro, numero, cidade):
     # conecta no banco
     db = get_db()
     cursor = db.cursor()
@@ -13,12 +13,16 @@ def inserir_fornecedor(nome_empresa, cnpj, quantidade, preco, rua, bairro, numer
 
     endereco_id = cursor.lastrowid
 
+    produto_quantidade = int(produto_quantidade)
+    preco = float(preco)
+
+    preco_total = produto_quantidade * preco
     # cria fornecedor
     cursor.execute(
         """INSERT INTO fornecedor 
-        (nome_empresa, cnpj, produto_quantidade, preco, endereco_id) 
-        VALUES (%s,%s,%s,%s,%s)""",
-        (nome_empresa, cnpj, quantidade, preco, endereco_id)
+        (nome_empresa, cnpj, produto_quantidade, preco, endereco_id, preco_total) 
+        VALUES (%s,%s,%s,%s,%s,%s)""",
+        (nome_empresa, cnpj, produto_quantidade, preco, endereco_id, preco_total)
     )
 
     db.commit()

@@ -7,9 +7,15 @@ def listar_estoque():
 
     # busca estoque com nome do vendedor
     cursor.execute("""
-        SELECT e.id, e.quantidade_calcas, e.preco_venda, v.nome
-        FROM estoque e
-        JOIN vendedor v ON e.vendedor_id = v.id
+       SELECT 
+    e.id, 
+    e.quantidade_calcas, 
+    e.preco_venda, 
+    (e.quantidade_calcas * e.preco_venda) AS preco_venda_total,
+    e.vendedor_id,
+    v.nome
+FROM estoque e
+JOIN vendedor v ON e.vendedor_id = v.id
     """)
 
     dados = cursor.fetchall()

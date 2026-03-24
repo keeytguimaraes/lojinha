@@ -5,11 +5,11 @@
 
 <h2>Editar Fornecedor</h2>
 
-<form method="POST" action="/fornecedor/atualizar_fornecedor/{{ fornecedor.id }}">
+<form method="POST" action="/atualizar_fornecedor/{{ fornecedor.id }}">
     <input name="nome_empresa" value="{{ fornecedor.nome_empresa }}" required>
     <input name="cnpj" value="{{ fornecedor.cnpj }}" required>
-    <input name="produto_quantidade" value="{{ fornecedor.produto_quantidade }}" required>
-    <input name="preco" value="{{ fornecedor.preco }}" required>
+    <input type="number" name="produto_quantidade" value="{{ fornecedor.produto_quantidade }}" required>
+    <input type="number" step="0.01" name="preco" value="{{ fornecedor.preco }}" required>
     <button type="submit">Salvar</button>
 </form>
 

@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-    // PREÇO
+    // PREÇO 
     var camposPreco = document.querySelectorAll('input[name="preco"], input[name="preco_venda"]');
 
     camposPreco.forEach(function(input) {

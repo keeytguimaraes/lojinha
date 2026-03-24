@@ -12,6 +12,7 @@
     <th>CNPJ</th>
     <th>Quantidade</th>
     <th>Preço</th>
+    <th>Preço Total</th>
     <th>Ações</th>
 </tr>
 
@@ -22,6 +23,7 @@
     <td>{{ fornecedor.cnpj }}</td>
     <td>{{ fornecedor.produto_quantidade }}</td>
     <td>{{ fornecedor.preco }}</td>
+    <td>{{ fornecedor.preco_total }}</td>
     <td>
         <a href="{{ url_for('fornecedor.excluir_fornecedor_route', id=fornecedor.id) }}">
             <button>Excluir</button>

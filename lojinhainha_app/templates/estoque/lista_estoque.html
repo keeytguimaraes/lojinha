@@ -8,18 +8,20 @@
 <table>
 <tr>
     <th>ID</th>
+    <th>Vendedor</th>
     <th>Quantidade</th>
     <th>Preço</th>
-    <th>Vendedor</th>
+    <th>Preço Total</th>
     <th>Ações</th>
 </tr>
 
 {% for item in estoque %}
 <tr>
     <td>{{ item.id }}</td>
+    <td>{{ item.nome }}</td>
     <td>{{ item.quantidade_calcas }}</td>
     <td>{{ item.preco_venda }}</td>
-    <td>{{ item.nome }}</td>
+    <td>{{ item.preco_venda_total }}</td>
     <td>
         <a href="{{ url_for('estoque.excluir_estoque_route', id=item.id) }}">
             <button>Excluir</button>

@@ -5,10 +5,10 @@
 
 <h2>Editar Estoque</h2>
 
-<form method="POST" action="/estoque/atualizar_estoque/{{ item.id }}">
+<form method="POST" action="{{ url_for('estoque.atualizar_estoque_route', id=item.id) }}">
     <!-- Preenchendo com os dados atuais do item -->
-    <input name="quantidade_calcas" value="{{ item.quantidade_calcas }}" required>
-    <input name="preco_venda" value="{{ item.preco_venda }}" required>
+    <input type="number" name="quantidade_calcas" value="{{ item.quantidade_calcas }}" required>
+    <input type="number" step="0.01" name="preco_venda" value="{{ item.preco_venda }}" required>
 
     <!-- Seleção do vendedor responsável -->
     <select name="vendedor_id" required>
