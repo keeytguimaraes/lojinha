@@ -10,6 +10,14 @@
     <input name="cnpj" value="{{ fornecedor.cnpj }}" required>
     <input type="number" name="produto_quantidade" value="{{ fornecedor.produto_quantidade }}" required>
     <input type="number" step="0.01" name="preco" value="{{ fornecedor.preco }}" required>
+
+    <!-- ENDEREÇO -->
+    <input type="text" name="rua" value="{{ fornecedor.rua }}" required>
+    <input type="text" name="bairro" value="{{ fornecedor.bairro }}" required>
+    <input type="number" name="numero" value="{{ fornecedor.numero }}" required>
+    <input type="text" name="cidade" value="{{ fornecedor.cidade }}" required>
+    <input type="text" name="complemento" value="{{ fornecedor.complemento }}">
+
     <button type="submit">Salvar</button>
 </form>
 

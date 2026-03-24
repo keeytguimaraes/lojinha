@@ -10,8 +10,9 @@
     <th>ID</th>
     <th>Empresa</th>
     <th>CNPJ</th>
+    <th>Endereço</th> 
     <th>Quantidade</th>
-    <th>Preço</th>
+    <th>Preço por unidade</th>
     <th>Preço Total</th>
     <th>Ações</th>
 </tr>
@@ -21,9 +22,20 @@
     <td>{{ fornecedor.id }}</td>
     <td>{{ fornecedor.nome_empresa }}</td>
     <td>{{ fornecedor.cnpj }}</td>
+
+    <!-- ENDEREÇO AO LADO DO CNPJ -->
+    <td>
+        {{ fornecedor.rua }}, {{ fornecedor.numero }} - {{ fornecedor.bairro }}<br>
+        {{ fornecedor.cidade }}
+        {% if fornecedor.complemento %}
+            - {{ fornecedor.complemento }}
+        {% endif %}
+    </td>
+
     <td>{{ fornecedor.produto_quantidade }}</td>
     <td>{{ fornecedor.preco }}</td>
     <td>{{ fornecedor.preco_total }}</td>
+
     <td>
         <a href="{{ url_for('fornecedor.excluir_fornecedor_route', id=fornecedor.id) }}">
             <button>Excluir</button>

@@ -8,10 +8,16 @@ def listar_clientes():
     # busca clientes com endereço
     cursor.execute("""
         SELECT 
-            c.id, c.nome, c.cpf,
-            e.rua, e.bairro, e.numero, e.cidade
-        FROM cliente c
-        JOIN endereco e ON c.endereco_id = e.id
+    c.id,
+    c.nome,
+    c.cpf,
+    e.rua,
+    e.bairro,
+    e.numero,
+    e.cidade,
+    e.complemento
+FROM cliente c
+JOIN endereco e ON c.endereco_id = e.id
     """)
 
     dados = cursor.fetchall()

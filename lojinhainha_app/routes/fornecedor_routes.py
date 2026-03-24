@@ -22,7 +22,8 @@ def add_fornecedor():
         request.form['rua'],
         request.form['bairro'],
         request.form['numero'],
-        request.form['cidade']
+        request.form['cidade'],
+        request.form['complemento']
     )
     return redirect("/lista_fornecedores")
 

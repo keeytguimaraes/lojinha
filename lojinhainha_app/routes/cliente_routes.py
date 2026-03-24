@@ -25,7 +25,8 @@ def add_cliente():
         request.form["rua"],
         request.form["bairro"],
         request.form["numero"],
-        request.form["cidade"]
+        request.form["cidade"],
+        request.form["complemento"]
     )
     return redirect("/clientes")
 

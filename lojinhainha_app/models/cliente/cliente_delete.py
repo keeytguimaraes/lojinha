@@ -5,7 +5,10 @@ def excluir_cliente(id):
     db = get_db()
     cursor = db.cursor()
 
-    # remove cliente pelo id
+    # APAGA PRIMEIRO AS VENDAS
+    cursor.execute("DELETE FROM vendas WHERE cliente_id = %s", (id,))
+
+    #  DEPOIS APAGA O CLIENTE
     cursor.execute("DELETE FROM cliente WHERE id = %s", (id,))
 
     db.commit()

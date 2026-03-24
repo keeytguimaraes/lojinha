@@ -1,14 +1,14 @@
 from database.connection import get_db
 
-def inserir_cliente(nome, cpf, rua, bairro, numero, cidade):
+def inserir_cliente(nome, cpf, rua, bairro, numero, cidade, complemento):
     # cria conexão com banco
     db = get_db()
     cursor = db.cursor()
 
     # insere endereço do cliente
     cursor.execute(
-        "INSERT INTO endereco (rua, bairro, numero, cidade) VALUES (%s,%s,%s,%s)",
-        (rua, bairro, numero, cidade)
+        "INSERT INTO endereco (rua, bairro, numero, cidade, complemento) VALUES (%s,%s,%s,%s,%s)",
+        (rua, bairro, numero, cidade, complemento)
     )
 
     # pega id do endereço criado

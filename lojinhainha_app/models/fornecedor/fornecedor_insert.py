@@ -1,14 +1,16 @@
 from database.connection import get_db
 
-def inserir_fornecedor(nome_empresa, cnpj, produto_quantidade, preco, rua, bairro, numero, cidade):
+def inserir_fornecedor(nome_empresa, cnpj, produto_quantidade, preco, rua, bairro, numero, cidade, complemento):
     # conecta no banco
     db = get_db()
     cursor = db.cursor()
 
     # cria endereço
     cursor.execute(
-        "INSERT INTO endereco (rua, bairro, numero, cidade) VALUES (%s,%s,%s,%s)",
-        (rua, bairro, numero, cidade)
+        cursor.execute(
+    "INSERT INTO endereco (rua, bairro, numero, cidade, complemento) VALUES (%s,%s,%s,%s,%s)",
+    (rua, bairro, numero, cidade, complemento)
+)
     )
 
     endereco_id = cursor.lastrowid

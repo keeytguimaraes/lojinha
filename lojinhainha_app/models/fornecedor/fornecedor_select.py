@@ -7,11 +7,20 @@ def listar_fornecedores():
 
     # busca fornecedores com endereço
     cursor.execute("""
-        SELECT f.id, f.nome_empresa, f.cnpj, 
-               f.produto_quantidade, f.preco, f.preco_total,
-               e.rua, e.bairro, e.numero, e.cidade
-        FROM fornecedor f
-        JOIN endereco e ON f.endereco_id = e.id
+        SELECT 
+    f.id, 
+    f.nome_empresa, 
+    f.cnpj, 
+    f.produto_quantidade, 
+    f.preco,
+    f.preco_total,
+    e.rua, 
+    e.bairro, 
+    e.numero, 
+    e.cidade,
+    e.complemento
+FROM fornecedor f
+JOIN endereco e ON f.endereco_id = e.id
     """)
 
     dados = cursor.fetchall()

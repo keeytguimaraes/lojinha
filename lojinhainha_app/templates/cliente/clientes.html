@@ -10,10 +10,7 @@
     <th>ID</th>
     <th>Nome</th>
     <th>CPF</th>
-    <th>Cidade</th>
-    <th>Rua</th>
-    <th>Bairro</th>
-    <th>Número</th>
+    <th>Endereço</th> 
     <th>Ações</th>
 </tr>
 
@@ -22,10 +19,16 @@
     <td>{{ cliente.id }}</td>
     <td>{{ cliente.nome }}</td>
     <td>{{ cliente.cpf }}</td>
-    <td>{{ cliente.cidade }}</td>
-    <td>{{ cliente.rua }}</td>
-    <td>{{ cliente.bairro }}</td>
-    <td>{{ cliente.numero }}</td>
+
+    <!-- ENDEREÇO COMPLETO -->
+    <td>
+        {{ cliente.rua }}, {{ cliente.numero }} - {{ cliente.bairro }}<br>
+        {{ cliente.cidade }}
+        {% if cliente.complemento %}
+            - {{ cliente.complemento }}
+        {% endif %}
+    </td>
+
     <td>
         <a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}">
             <button>Excluir</button>
