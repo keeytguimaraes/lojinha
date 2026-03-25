@@ -9,7 +9,7 @@ vendedor_bp = Blueprint("vendedor", __name__)
 # 🔹 Tela de CADASTRO
 @vendedor_bp.route("/vendedores")
 def tela_vendedor():
-    return render_template("vendedor/vendedores.html")  # só cadastro
+    return render_template("vendedor/vendedores.html")
 
 # 🔹 LISTA DE VENDEDORES
 @vendedor_bp.route("/lista_vendedores")
@@ -22,10 +22,9 @@ def lista_vendedores():
 def add_vendedor():
     inserir_vendedor(
         request.form["nome"],
-        request.form["cpf"],
-        request.form["quantidade_vendas"]
+        request.form["cpf"]
     )
-    return redirect("/lista_vendedores")  # 👈 VOLTA PRA LISTA
+    return redirect("/lista_vendedores")
 
 # 🔹 Editar vendedor
 @vendedor_bp.route("/editar_vendedor/<int:id>")
@@ -39,8 +38,7 @@ def atualizar_vendedor_route(id):
     atualizar_vendedor(
         id,
         request.form["nome"],
-        request.form["cpf"],
-        request.form["quantidade_vendas"]
+        request.form["cpf"]
     )
     return redirect("/lista_vendedores")
 

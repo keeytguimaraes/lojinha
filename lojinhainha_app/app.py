@@ -13,12 +13,10 @@ app = Flask(__name__)
 # 🔹 Rota da página inicial
 @app.route("/")
 def index():
-    """
-    Página inicial do sistema.
-    """
+
     return render_template("index.html")
 
-#  Registrando os blueprints sem url_prefix
+#  Registrando os blueprints sem url_prefix (se não quebra o código)
 app.register_blueprint(cliente_bp)
 app.register_blueprint(fornecedor_bp)
 app.register_blueprint(vendedor_bp)

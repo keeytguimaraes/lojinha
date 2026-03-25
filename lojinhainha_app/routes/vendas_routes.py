@@ -43,13 +43,20 @@ def excluir_venda_route(id):
 @vendas_bp.route("/editar_venda/<int:id>")
 def editar_venda(id):
     venda = next((v for v in listar_vendas() if v["id"] == id), None)
-    return render_template("vendas/editar_venda.html", venda=venda)
+    return render_template(
+        "vendas/editar_venda.html",
+        venda=venda,
+        clientes=listar_clientes(),      # ✅ ADICIONADO
+        vendedores=listar_vendedores()   # ✅ ADICIONADO
+    )
 
 # Atualizar venda
 @vendas_bp.route("/atualizar_venda/<int:id>", methods=["POST"])
 def atualizar_venda_route(id):
     atualizar_venda(
         id,
+        request.form["cliente_id"],      # ✅ ADICIONADO
+        request.form["vendedor_id"],     # ✅ ADICIONADO
         request.form["quantidade_vendas"],
         request.form["preco"]
     )

@@ -11,7 +11,8 @@
     <th>Cliente</th>
     <th>Vendedor</th>
     <th>Qtd</th>
-    <th>Preço</th>
+    <th>Preço por unidade</th>
+    <th>Preço total</th>
     <th>Data</th>
     <th>Ações</th>
 </tr>
@@ -23,6 +24,7 @@
     <td>{{ venda.vendedor }}</td>
     <td>{{ venda.quantidade_vendas }}</td>
     <td>{{ venda.preco }}</td>
+    <td>R$ {{ "%.2f"|format(venda.preco_total) }}</td>
     <td>{{ venda.data }}</td>
     <td>
         <a href="{{ url_for('vendas.excluir_venda_route', id=venda.id) }}">

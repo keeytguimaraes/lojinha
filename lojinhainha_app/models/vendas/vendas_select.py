@@ -7,6 +7,7 @@ def listar_vendas():
     """
     db = get_db()
     cursor = db.cursor(dictionary=True)
+
     cursor.execute("""
         SELECT v.id, c.nome AS cliente, ve.nome AS vendedor,
                v.quantidade_vendas, v.preco, v.data
@@ -16,4 +17,9 @@ def listar_vendas():
     """)
     dados = cursor.fetchall()
     db.close()
+
+    # ======= ADICIONAR CÁLCULO DO TOTAL =======
+    for venda in dados:
+        venda["preco_total"] = float(venda["quantidade_vendas"]) * float(venda["preco"])
+
     return dados

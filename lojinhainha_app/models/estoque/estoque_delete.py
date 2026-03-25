@@ -5,7 +5,7 @@ def excluir_estoque(id):
     db = get_db()
     cursor = db.cursor()
 
-    # remove item do estoque
+    # remove item do estoque pelo ID
     cursor.execute("DELETE FROM estoque WHERE id = %s", (id,))
 
     db.commit()

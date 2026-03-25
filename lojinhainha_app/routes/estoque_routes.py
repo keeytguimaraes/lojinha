@@ -3,7 +3,7 @@ from models.estoque.estoque_insert import inserir_estoque
 from models.estoque.estoque_select import listar_estoque
 from models.estoque.estoque_update import atualizar_estoque
 from models.estoque.estoque_delete import excluir_estoque
-from models.vendedor.vendedor_select import listar_vendedores
+from models.fornecedor.fornecedor_select import listar_fornecedores
 
 estoque_bp = Blueprint("estoque", __name__)
 
@@ -11,7 +11,7 @@ estoque_bp = Blueprint("estoque", __name__)
 @estoque_bp.route("/estoque")
 def estoque():
     return render_template("estoque/estoque.html",
-     vendedores=listar_vendedores())
+     fornecedores=listar_fornecedores())
 
 # Inserir estoque
 @estoque_bp.route("/add_estoque", methods=["POST"])
@@ -19,7 +19,7 @@ def add_estoque():
     inserir_estoque(
         request.form["quantidade_calcas"],
         request.form["preco_venda"],
-        request.form["vendedor_id"]
+        request.form["fornecedor_id"]
     )
     return redirect("/lista_estoque")
 
@@ -34,7 +34,7 @@ def editar_estoque(id):
     item = next((e for e in listar_estoque() if e["id"] == id), None)
     return render_template("estoque/editar_estoque.html",
                            item=item,
-                           vendedores=listar_vendedores())
+                           fornecedores=listar_fornecedores())
 
 # Atualizar estoque
 @estoque_bp.route("/atualizar_estoque/<int:id>", methods=["POST"])
@@ -43,7 +43,7 @@ def atualizar_estoque_route(id):
         id,
         request.form["quantidade_calcas"],
         request.form["preco_venda"],
-        request.form["vendedor_id"]
+        request.form["fornecedor_id"]
     )
     return redirect("/lista_estoque")
 

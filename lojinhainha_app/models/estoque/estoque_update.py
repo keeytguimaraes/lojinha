@@ -1,6 +1,6 @@
 from database.connection import get_db
 
-def atualizar_estoque(id, quantidade, preco, vendedor_id):
+def atualizar_estoque(id, quantidade, preco, fornecedor_id):
     # conecta no banco
     db = get_db()
     cursor = db.cursor()
@@ -9,10 +9,11 @@ def atualizar_estoque(id, quantidade, preco, vendedor_id):
     preco = float(preco)
     preco_venda_total = quantidade * preco 
     
-    # atualiza item do estoque
+    # atualiza item do estoque COM fornecedor
     cursor.execute(
-    "UPDATE estoque SET quantidade_calcas=%s, preco_venda=%s, vendedor_id=%s WHERE id=%s",
-    (quantidade, preco, vendedor_id, id)
-)
+        "UPDATE estoque SET quantidade_calcas=%s, preco_venda=%s, fornecedor_id=%s WHERE id=%s",
+        (quantidade, preco, fornecedor_id, id)
+    )
+
     db.commit()
     db.close()
