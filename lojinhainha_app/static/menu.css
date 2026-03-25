@@ -2,22 +2,23 @@
 .menu-btn {
     position: fixed;
     top: 10px;
-    left: 10px;
+    right: 10px; /* muda de left para right */
     font-size: 25px;
     cursor: pointer;
     z-index: 1000;
-        color: white; /* 👈 muda a cor */
+    color: white;
 }
+
 .btn-voltar {
     position: fixed;
     top: 70px;
-    left: 20px;
+    right: 20px; /* muda de left para right */
     background: #7c2586;
     color: white;
     padding: 8px 12px;
     border-radius: 6px;
     text-decoration: none;
-    z-index: 2000; /* MAIS ALTO QUE TUDO */
+    z-index: 2000;
 }
 
 .sidebar a:hover {
@@ -33,7 +34,7 @@
     background: #7c2586;
     color: white;
     position: fixed;
-    left: -220px;
+    right: -220px;  /* <<< muda left para right */
     top: 0;
     padding: 20px;
     transition: 0.3s;
@@ -42,7 +43,7 @@
 
 /* SIDEBAR ATIVA */
 .sidebar.active {
-    left: 0;
+    right: 0;       /* <<< muda left para right */
 }
 
 /* TOPBAR */
@@ -55,28 +56,29 @@
     background: #7c2586;
     display: flex;
     align-items: center;
-    padding-left: 70px;
+    padding-left: 20px; /* opcional: ajusta o texto para não encostar na sidebar */
     box-shadow: 0 2px 5px rgba(8, 8, 8, 0.749);
 }
 
 .topbar h4 {
     color: rgba(255, 255, 255, 0.868);
     margin-top: 9px;
-    /* ajusta a altura do texto */
 }
 
 /* CONTEÚDO */
 .content {
     margin-left: 0;
+    margin-right: 0; /* reset */
     padding: 70px 20px 20px 20px; /* espaço da topbar */
     transition: 0.3s;
 }
 
 /* EMPURRA CONTEÚDO */
 .content.shift {
-    margin-left: 220px;
+    margin-right: 220px; /* <<< agora desloca para a direita */
 }
-/* REMOVE QUALQUER LINHA ROXA / FOCO */
+
+/* REMOVE FOCO */
 input:focus,
 select:focus,
 textarea:focus,

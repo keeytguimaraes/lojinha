@@ -1,18 +1,23 @@
+/* RESET & BODY */
 body {
     margin: 0;
     font-family: Arial;
     background-color: #f4f6f9;
 }
 
-🔵 SIDEBAR
+/* 🔵 SIDEBAR */
 .sidebar {
+    position: fixed;
+    top: 0;
+    right: -220px;       /* sidebar escondida à direita */
     width: 220px;
     height: 100vh;
     background: #7d2686;
     color: white;
-    position: fixed;
     padding: 20px;
-    box-shadow: 0 2px 5px rgba(8, 8, 8, 0.749);
+    box-shadow: 0 2px 5px rgba(8, 8, 8, 0.75);
+    z-index: 999;
+    transition: 0.3s;
 }
 
 .sidebar h4 {
@@ -33,9 +38,19 @@ body {
     background: #7d2686;
 }
 
+/* 🔝 TOPBAR */
+.topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
 /* 🟢 CONTEÚDO */
 .content {
-    margin-left: 240px;
+    margin-left: 20px;    /* espaço mínimo à esquerda */
+    margin-right: 240px;  /* espaço para sidebar à direita */
     padding: 20px;
 }
 
@@ -79,9 +94,9 @@ input, select {
 button {
     padding: 10px;
     border: none;
+    border-radius: 6px;
     background: #7e1c89d2;
     color: white;
-    border-radius: 6px;
     cursor: pointer;
 }
 
