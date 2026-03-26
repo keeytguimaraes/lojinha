@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<!-- Template para listar todos os vendedores -->
+<!-- Título e botão voltar (opcional: pode colocar na mesma linha depois) -->
+<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
+    <h2>Vendedores</h2>
+    <button type="button" class="botao" onclick="history.back()">← Voltar</button>
+</div>
 
-<h2>Vendedores</h2>
+<input type="text" id="search-input" placeholder="Buscar por nome..." style="margin-bottom:10px; padding:5px 10px; width:200px;">
+<div id="sugestoes-box" class="lista-sugestoes"></div>
 
-<table>
+<script src="{{ url_for('static', filename='js/search.js') }}"></script>
+
+<!-- Tabela de vendedores -->
+<table id="tabela-vendedores">
 <tr>
     <th>ID</th>
     <th>Nome</th>
@@ -28,7 +36,6 @@
     </td>
 </tr>
 {% endfor %}
-
 </table>
 
 {% endblock %}

@@ -1,9 +1,17 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<h2>Estoque</h2>
+<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
+    <h2>Estoque</h2>
+    <button type="button" class="botao" onclick="history.back()">← Voltar</button>
+</div>
 
-<table>
+<input type="text" id="search-input" placeholder="Buscar por fornecedor..." style="margin-bottom:10px; padding:5px 10px; width:200px;">
+<div id="sugestoes-box" class="lista-sugestoes"></div>
+
+<script src="{{ url_for('static', filename='js/search_estoque.js') }}"></script>
+
+<table id="tabela-estoque">
 <tr>
     <th>ID</th>
     <th>Fornecedor</th>
@@ -30,7 +38,6 @@
     </td>
 </tr>
 {% endfor %}
-
 </table>
 
 {% endblock %}

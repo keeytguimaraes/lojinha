@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<!-- Template para listar todos os clientes -->
+<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
+    <h2>Clientes</h2>
+    <button type="button" class="botao" onclick="history.back()">← Voltar</button>
+</div>
 
-<h2>Clientes</h2>
-<table>
+<input type="text" class="search-input" placeholder="Buscar por nome..." style="margin-bottom:10px; padding:5px 10px; width:200px;">
+<div class="sugestoes-box"></div>
+
+<table class="tabela">
 <tr>
     <th>ID</th>
     <th>Nome</th>
     <th>CPF</th>
-    <th>Endereço</th> 
+    <th>Endereço</th>
     <th>Ações</th>
 </tr>
 
@@ -18,27 +23,18 @@
     <td>{{ cliente.id }}</td>
     <td>{{ cliente.nome }}</td>
     <td>{{ cliente.cpf }}</td>
-
-    <!-- ENDEREÇO COMPLETO -->
     <td>
         {{ cliente.rua }}, {{ cliente.numero }} - {{ cliente.bairro }}<br>
         {{ cliente.cidade }}
-        {% if cliente.complemento %}
-            - {{ cliente.complemento }}
-        {% endif %}
+        {% if cliente.complemento %}- {{ cliente.complemento }}{% endif %}
     </td>
-
     <td>
-        <a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}">
-            <button>Excluir</button>
-        </a>
-        <a href="{{ url_for('cliente.editar_cliente', id=cliente.id) }}">
-            <button>Alterar</button>
-        </a>
+        <a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}"><button>Excluir</button></a>
+        <a href="{{ url_for('cliente.editar_cliente', id=cliente.id) }}"><button>Alterar</button></a>
     </td>
 </tr>
 {% endfor %}
-
 </table>
 
+<script src="{{ url_for('static', filename='js/search_sugestao.js') }}"></script>
 {% endblock %}

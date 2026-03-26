@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<!-- Template para listar todas as vendas -->
+<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
+    <h2>Vendas</h2>
+    <button type="button" class="botao" onclick="history.back()">← Voltar</button>
+</div>
 
-<h2>Vendas</h2>
+<input type="text" id="search-input" placeholder="Buscar por cliente ou vendedor..." style="margin-bottom:10px; padding:5px 10px; width:250px;">
+<div id="sugestoes-box" class="lista-sugestoes"></div>
 
-<table>
+<script src="{{ url_for('static', filename='js/search_vendas.js') }}"></script>
+
+<table id="tabela-vendas">
 <tr>
     <th>ID</th>
     <th>Cliente</th>
@@ -36,7 +42,6 @@
     </td>
 </tr>
 {% endfor %}
-
 </table>
 
 {% endblock %}
