@@ -6,10 +6,14 @@
     <button type="button" class="botao" onclick="history.back()">← Voltar</button>
 </div>
 
-<input type="text" class="search-input" placeholder="Buscar por nome..." style="margin-bottom:10px; padding:5px 10px; width:200px;">
-<div class="sugestoes-box"></div>
+<!-- INPUT DE BUSCA -->
+<input type="text" id="search-input" placeholder="Buscar por nome..." style="margin-bottom:10px; padding:5px 10px; width:200px;">
 
-<table class="tabela">
+<!-- CAIXA DE SUGESTÕES -->
+<div id="sugestoes-box" class="lista-sugestoes"></div>
+
+<!-- TABELA -->
+<table id="tabela-clientes">
 <tr>
     <th>ID</th>
     <th>Nome</th>
@@ -29,12 +33,18 @@
         {% if cliente.complemento %}- {{ cliente.complemento }}{% endif %}
     </td>
     <td>
-        <a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}"><button>Excluir</button></a>
-        <a href="{{ url_for('cliente.editar_cliente', id=cliente.id) }}"><button>Alterar</button></a>
+        <a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}">
+            <button>Excluir</button>
+        </a>
+        <a href="{{ url_for('cliente.editar_cliente', id=cliente.id) }}">
+            <button>Alterar</button>
+        </a>
     </td>
 </tr>
 {% endfor %}
 </table>
 
-<script src="{{ url_for('static', filename='js/search_sugestao.js') }}"></script>
+<!-- JS CORRETO -->
+<script src="{{ url_for('static', filename='js/search_clientes.js') }}"></script>
+
 {% endblock %}

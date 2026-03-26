@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById("search-input");
-    const tabela = document.getElementById("tabela-estoque");
+    const tabela = document.getElementById("tabela-clientes");
     if (!input || !tabela) return;
 
     const linhas = Array.from(tabela.getElementsByTagName("tr")).slice(1);
@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.appendChild(sugestoesBox);
     }
 
-    // 🔥 IGUAL AO CLIENTE (ESSA PARTE FAZ A DIFERENÇA)
     sugestoesBox.style.position = "absolute";
     sugestoesBox.style.background = "white";
     sugestoesBox.style.border = "1px solid #ccc";
@@ -45,10 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 sugestoesBox.innerHTML = "";
                 sugestoesBox.style.display = "none";
 
-                const linha = linhas.find(l =>
-                    l.getElementsByTagName("td")[1].textContent === nome
-                );
-
+                const linha = linhas.find(l => l.getElementsByTagName("td")[1].textContent === nome);
                 if (linha) {
                     linha.scrollIntoView({ behavior: "smooth", block: "center" });
                     linha.style.transition = "background 0.5s";
@@ -60,7 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
             sugestoesBox.appendChild(div);
         });
 
-        // 🔥 POSICIONAMENTO IGUAL AO CLIENTE
         if (resultados.length > 0) {
             const rect = input.getBoundingClientRect();
             sugestoesBox.style.top = rect.bottom + window.scrollY + "px";
@@ -72,14 +67,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // 🔥 FECHAR AO CLICAR FORA
     document.addEventListener("click", function (e) {
         if (e.target !== input && !sugestoesBox.contains(e.target)) {
             sugestoesBox.style.display = "none";
         }
     });
 
-    // 🔥 AJUSTAR POSIÇÃO AO SCROLL
     window.addEventListener("scroll", function () {
         if (sugestoesBox.style.display === "block") {
             const rect = input.getBoundingClientRect();

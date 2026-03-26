@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<!-- Título e botão Voltar na mesma linha -->
+<!-- Título e botão Voltar -->
 <div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
     <h2>Fornecedores</h2>
     <button type="button" class="botao" onclick="history.back()">← Voltar</button>
@@ -9,11 +9,11 @@
 
 <!-- Campo de busca -->
 <input type="text" id="search-input" placeholder="Buscar por empresa..." style="margin-bottom:10px; padding:5px 10px; width:250px;">
-<div id="sugestoes-box" class="lista-sugestoes"></div>
-<!-- Importa o JS de autocomplete -->
-<script src="{{ url_for('static', filename='js/search_fornecedores.js') }}"></script>
 
-<!-- Tabela de fornecedores -->
+<!-- Caixa de sugestões -->
+<div id="sugestoes-box" class="lista-sugestoes"></div>
+
+<!-- Tabela -->
 <table id="tabela-fornecedores">
 <tr>
     <th>ID</th>
@@ -51,5 +51,7 @@
 {% endfor %}
 </table>
 
+<!-- 🔥 JS SEMPRE NO FINAL -->
+<script src="{{ url_for('static', filename='js/search_fornecedores.js') }}"></script>
 
 {% endblock %}
