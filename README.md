@@ -11,7 +11,7 @@ Como recurso adicional, foi implementada uma funcionalidade de busca dinâmica n
 
 O principal objetivo do projeto é facilitar o controle e a organização de um estoque de forma prática, centralizando informações importantes e auxiliando na gestão do negócio de maneira simples e eficiente.
 
-#Lojinha project
+## Lojinha project
 
 This project consists of the development of a web system for inventory control of a small business (“Lojinhainha”), created as a school project. The application was developed using Python with the Flask framework and a MySQL database.
 
