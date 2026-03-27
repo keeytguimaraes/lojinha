@@ -28,8 +28,17 @@
     <td>{{ item.id }}</td>
     <td>{{ item.nome_empresa }}</td>
     <td>{{ item.quantidade_calcas }}</td>
-    <td>{{ item.preco_venda }}</td>
-    <td>{{ item.preco_venda_total }}</td>
+
+    <!--  PREÇO UNITÁRIO  -->
+    <td>
+        R$ {{ "%.2f"|format(item.preco_venda) }}
+    </td>
+    <!--  PREÇO TOTAL  -->
+    <td>
+        R$ {{ "%.2f"|format(item.preco_venda_total) }}
+    </td>
+
+    <!-- AÇÕES -->
     <td>
         <a href="{{ url_for('estoque.excluir_estoque_route', id=item.id) }}">
             <button>Excluir</button>

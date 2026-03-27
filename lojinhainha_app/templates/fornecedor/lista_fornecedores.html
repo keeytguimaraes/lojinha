@@ -37,8 +37,17 @@
         {% if fornecedor.complemento %}- {{ fornecedor.complemento }}{% endif %}
     </td>
     <td>{{ fornecedor.produto_quantidade }}</td>
-    <td>{{ fornecedor.preco }}</td>
-    <td>{{ fornecedor.preco_total }}</td>
+
+    <!--  PREÇO UNITÁRIO  -->
+    <td>
+        R$ {{ "%.2f"|format(fornecedor.preco) }}
+    </td>
+    <!--  PREÇO TOTAL -->
+    <td>
+        R$ {{ "%.2f"|format(fornecedor.preco_total) }}
+    </td>
+
+    <!-- AÇÕES -->
     <td>
         <a href="{{ url_for('fornecedor.excluir_fornecedor_route', id=fornecedor.id) }}">
             <button>Excluir</button>
@@ -51,7 +60,7 @@
 {% endfor %}
 </table>
 
-<!-- 🔥 JS SEMPRE NO FINAL -->
+<!-- JS SEMPRE NO FINAL -->
 <script src="{{ url_for('static', filename='js/search_fornecedores.js') }}"></script>
 
 {% endblock %}

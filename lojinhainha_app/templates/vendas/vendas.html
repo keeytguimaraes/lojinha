@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<!-- Template para registrar uma nova venda -->
 
 <h2>Registrar Venda</h2>
 
@@ -14,27 +13,42 @@
         <input type="hidden" name="cliente_id" id="cliente_id">
         <input type="text" name="cpf" id="cpf" placeholder="CPF do cliente" readonly required>
         <div id="sugestoes" class="lista-sugestoes"></div>
-        <script src="{{ url_for('static', filename='js/autocomplete_cliente.js') }}"></script>
 
-
-        <!-- VENDEDOR (IGUAL CLIENTE) -->
+        <!-- VENDEDOR -->
         <input type="text" id="vendedor_input" placeholder="Digite o vendedor" required
         data-clientes='{{ vendedores | tojson | safe }}'>
         <input type="hidden" name="vendedor_id" id="vendedor_id">
 
-        <!-- Dados da venda -->
-        <input type="number" name="quantidade_vendas" placeholder="Quantidade" required>
-        <input type="number" step="0.01" min="0" name="preco" placeholder="Preço por unidade" required>
+        <!-- FORNECEDOR (AUTOCOMPLETE) -->
+        <input type="text" id="fornecedor_input" placeholder="Digite o fornecedor" required
+        data-fornecedores='{{ fornecedores | tojson | safe }}'>
+        <input type="hidden" name="fornecedor_id" id="fornecedor_id">
+        <div id="sugestoes_fornecedor" class="lista-sugestoes"></div>
+
+        <!-- QUANTIDADE -->
+        <input type="number" id="quantidade" name="quantidade_vendas"
+               placeholder="Quantidade" required oninput="calcularPreco()">
+
+        <!-- PREÇO AUTOMÁTICO -->
+        <input type="text" id="preco_unitario" name="preco"
+               placeholder="Preço por unidade" readonly required>
+
+        <!-- PREÇO TOTAL -->
+        <input type="text" id="preco_total" name="preco_total"
+               placeholder="Preço total" readonly required>
+
+        <!-- DATA -->
         <input type="date" name="data" required>
         <button type="submit">Registrar</button>
-
         <div style="display: inline-block; margin-left: 10px;">
             <button type="button" class="botao" onclick="history.back()">Voltar</button>
         </div>
     </form>
 </div>
 
-<!-- JS DO VENDEDOR -->
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/autocomplete_cliente.js') }}"></script>
 <script src="{{ url_for('static', filename='js/autocomplete_vendedor.js') }}"></script>
+<script src="{{ url_for('static', filename='js/autocomplete_vendas.js') }}"></script>
 
 {% endblock %}
