@@ -9,7 +9,9 @@
     <form action="/add_vendedor" method="POST">
         <!-- Dados do vendedor -->
         <input type="text" name="nome" placeholder="Nome" required>
-        <input type="text" name="cpf" placeholder="CPF" required>
+        <input type="number" name="cpf" placeholder="CPF" required>
+        <input type="email" name="email" placeholder="Email">
+        <input type="date" name="data_nascimento">
         
         <button type="submit">Cadastrar</button>
         <div style="display: inline-block; margin-left: 10px;">

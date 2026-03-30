@@ -8,6 +8,9 @@
 <form method="POST" action="/atualizar_cliente/{{ cliente.id }}">
     <input name="nome" value="{{ cliente.nome }}" required>
     <input name="cpf" value="{{ cliente.cpf }}" required>
+    <input type="email" name="email" value="{{ cliente.email }}" placeholder="Email">
+    <input type="date" name="data_nascimento" 
+           value="{{ cliente.data_nascimento.strftime('%Y-%m-%d') if cliente.data_nascimento }}">
     <input name="cidade" value="{{ cliente.cidade }}" required>
     <input name="rua" value="{{ cliente.rua }}" required>
     <input name="bairro" value="{{ cliente.bairro }}" required>

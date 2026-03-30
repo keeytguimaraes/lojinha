@@ -18,6 +18,8 @@
     <th>ID</th>
     <th>Nome</th>
     <th>CPF</th>
+    <th>Email</th>
+    <th>Data de nascimento</th>
     <th>Ações</th>
 </tr>
 
@@ -26,6 +28,15 @@
     <td>{{ vendedor.id }}</td>
     <td>{{ vendedor.nome }}</td>
     <td>{{ vendedor.cpf }}</td>
+    <td>{{ vendedor.email }}</td>
+  <!-- DATA CORRIGIDA -->
+  <td>
+    {% if vendedor.data_nascimento %}
+        {{ vendedor.data_nascimento.strftime("%d/%m/%Y") }}
+    {% else %}
+        -
+    {% endif %}
+</td>
     <td>
         <a href="{{ url_for('vendedor.excluir_vendedor_route', id=vendedor.id) }}">
             <button>Excluir</button>

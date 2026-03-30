@@ -19,6 +19,8 @@
     <th>Nome</th>
     <th>CPF</th>
     <th>Endereço</th>
+    <th>Email</th>
+    <th>Data de nascimento</th>
     <th>Ações</th>
 </tr>
 
@@ -27,10 +29,18 @@
     <td>{{ cliente.id }}</td>
     <td>{{ cliente.nome }}</td>
     <td>{{ cliente.cpf }}</td>
+  <td>
+    {{ cliente.rua }}, {{ cliente.numero }} - {{ cliente.bairro }}<br>
+    {{ cliente.cidade }}
+    {% if cliente.complemento %}- {{ cliente.complemento }}{% endif %}
+</td>
+    <td>{{ cliente.email }}</td>
     <td>
-        {{ cliente.rua }}, {{ cliente.numero }} - {{ cliente.bairro }}<br>
-        {{ cliente.cidade }}
-        {% if cliente.complemento %}- {{ cliente.complemento }}{% endif %}
+        {% if cliente.data_nascimento %}
+            {{ cliente.data_nascimento.strftime("%d/%m/%Y") }}
+        {% else %}
+            -
+        {% endif %}
     </td>
     <td>
         <a href="{{ url_for('cliente.excluir_cliente_route', id=cliente.id) }}">

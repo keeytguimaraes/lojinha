@@ -22,6 +22,8 @@ def add_cliente():
     inserir_cliente(
         request.form["nome"],
         request.form["cpf"],
+        request.form["email"],                 # NOVO
+        request.form["data_nascimento"],       # NOVO
         request.form["rua"],
         request.form["bairro"],
         request.form["numero"],
@@ -54,9 +56,12 @@ def atualizar_cliente_route(id):
         id,
         request.form["nome"],
         request.form["cpf"],
+        request.form["email"],                 # NOVO
+        request.form["data_nascimento"],       # NOVO
         request.form["rua"],
         request.form["bairro"],
         request.form["numero"],
-        request.form["cidade"]
+        request.form["cidade"],
+        request.form["complemento"]           
     )
     return redirect("/clientes")

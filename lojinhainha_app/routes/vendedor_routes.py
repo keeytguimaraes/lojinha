@@ -22,7 +22,9 @@ def lista_vendedores():
 def add_vendedor():
     inserir_vendedor(
         request.form["nome"],
-        request.form["cpf"]
+        request.form["cpf"],
+        request.form["email"],                 # NOVO
+        request.form["data_nascimento"]        # NOVO
     )
     return redirect("/lista_vendedores")
 
@@ -38,7 +40,9 @@ def atualizar_vendedor_route(id):
     atualizar_vendedor(
         id,
         request.form["nome"],
-        request.form["cpf"]
+        request.form["cpf"],
+        request.form["email"],                 # NOVO
+        request.form["data_nascimento"]        # NOVO
     )
     return redirect("/lista_vendedores")
 
