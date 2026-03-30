@@ -1,16 +1,13 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<!-- Template para editar uma venda existente -->
-
 <h2>Editar Venda</h2>
 
 <form method="POST" action="/atualizar_venda/{{ venda.id }}">
-
     <!-- CLIENTE -->
     <input type="text" id="cliente_input" placeholder="Digite o cliente" required
-    value="{{ venda.cliente }}"
-    data-clientes='{{ clientes | tojson | safe }}'>
+           value="{{ venda.cliente }}"
+           data-clientes='{{ clientes | tojson | safe }}'>
     <input type="hidden" name="cliente_id" id="cliente_id" value="{{ venda.cliente_id }}">
     <input type="text" name="cpf" id="cpf" value="{{ venda.cpf }}" readonly required>
     <div id="sugestoes" class="lista-sugestoes"></div>
@@ -18,16 +15,23 @@
 
     <!-- VENDEDOR -->
     <input type="text" id="vendedor_input" placeholder="Digite o vendedor" required
-    value="{{ venda.vendedor }}"
-    data-clientes='{{ vendedores | tojson | safe }}'>
+           value="{{ venda.vendedor }}"
+           data-clientes='{{ vendedores | tojson | safe }}'>
     <input type="hidden" name="vendedor_id" id="vendedor_id" value="{{ venda.vendedor_id }}">
+    <div id="sugestoes_vendedor" class="lista-sugestoes"></div>
+    <script src="{{ url_for('static', filename='js/autocomplete_vendedor.js') }}"></script>
 
-    <!-- Quantidade vendida -->
-    <input type="number" name="quantidade_vendas" value="{{ venda.quantidade_vendas }}" required>
-    
-    </div>
+    <!-- QUANTIDADE -->
+    <input type="number" id="quantidade" name="quantidade_vendas" value="{{ venda.quantidade_vendas }}" required oninput="calcularPreco()">
+
+    <!-- DATA -->
+    <input type="date" name="data" value="{{ venda.data.strftime('%Y-%m-%d') }}" required>
+
+    <!-- BOTÕES -->
+    <button type="submit">Atualizar Venda</button>
+    <button type="button" class="botao" onclick="history.back()">Voltar</button>
 </form>
 
-<script src="{{ url_for('static', filename='js/autocomplete_vendedor.js') }}"></script>
+<script src="{{ url_for('static', filename='js/calculo_preco.js') }}"></script>
 
 {% endblock %}
