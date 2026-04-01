@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
+    <h2>Administradores</h2>
+    <button type="button" class="botao" onclick="history.back()">← Voltar</button>
+</div>
+
+<!-- INPUT DE BUSCA -->
+<input type="text" id="search-input" placeholder="Buscar por nome..." style="margin-bottom:10px; padding:5px 10px; width:200px;">
+
+<!-- CAIXA DE SUGESTÕES -->
+<div id="sugestoes-box" class="lista-sugestoes"></div>
+
+<!-- TABELA -->
+<table id="tabela-adms">
+<tr>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>CPF</th>
+    <th>Email</th>
+    <th>Data de nascimento</th>
+    <th>Ações</th>
+</tr>
+
+{% for adm in adms %}
+<tr>
+    <td>{{ adm.id }}</td>
+    <td>{{ adm.nome }}</td>
+    <td>{{ adm.cpf }}</td>
+    <td>{{ adm.email }}</td>
+    <td>
+        {% if adm.data_nascimento %}
+            {{ adm.data_nascimento.strftime("%d/%m/%Y") }}
+        {% else %}
+            -
+        {% endif %}
+    </td>
+    <td>
+        <a href="/adms/deletar/{{ adm.id }}">
+            <button>Excluir</button>
+        </a>
+        <a href="/adms/editar/{{ adm.id }}">
+            <button>Alterar</button>
+        </a>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/search_adms.js') }}"></script>
+
+{% endblock %}
