@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
+from routes.auth_routes import login_required
 from models.adm.adm_insert import inserir_adm
 from models.adm.adm_select import listar_adms, buscar_adm_por_id
 from models.adm.adm_update import atualizar_adm
@@ -8,6 +9,7 @@ adm_bp = Blueprint("adm", __name__)
 
 # 🔹 LISTAR
 @adm_bp.route("/adms")
+@login_required
 def listar():
     adms = listar_adms()
     return render_template("adm/listar_adm.html", adms=adms)
@@ -15,6 +17,7 @@ def listar():
 
 # 🔹 CADASTRAR
 @adm_bp.route("/adms/novo", methods=["GET", "POST"])
+@login_required
 def cadastrar():
     if request.method == "POST":
         nome = request.form["nome"]
@@ -30,6 +33,7 @@ def cadastrar():
 
 # 🔹 EDITAR
 @adm_bp.route("/adms/editar/<int:id>", methods=["GET", "POST"])
+@login_required
 def editar(id):
     if request.method == "POST":
         nome = request.form["nome"]
@@ -46,6 +50,7 @@ def editar(id):
 
 # 🔹 DELETAR
 @adm_bp.route("/adms/deletar/<int:id>")
+@login_required
 def deletar(id):
     deletar_adm(id)
     return redirect("/adms")

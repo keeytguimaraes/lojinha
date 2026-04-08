@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div style="padding-top: 20px;">
+    <h1>🏠 Bem-vindo Administrador</h1>
+    <p>Bem-vindo, {{ session.nome }}! Acesso total liberado.</p>
+
+    <!-- Cards de acesso rápido ADM -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+        <!-- Card Gerenciar Usuários -->
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h5>👤 Gerenciar Usuários</h5>
+            <a href="{{ url_for('auth.registro') }}" class="btn-voltar" style="width: 100%; text-align: center;">Registrar ADM/Vendedor</a>
+        </div>
+
+        <!-- Card Tabelas Completas -->
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h5>📋 Tabelas Completas</h5>
+            <a href="/clientes" class="btn-voltar" style="width: 100%; text-align: center;">Listar Clientes</a>
+            <a href="/lista_estoque" class="btn-voltar" style="width: 100%; text-align: center;">Listar Estoque</a>
+            <a href="/lista_vendas" class="btn-voltar" style="width: 100%; text-align: center;">Listar Vendas</a>
+            <a href="/lista_fornecedores" class="btn-voltar" style="width: 100%; text-align: center;">Listar Fornecedores</a>
+        </div>
+
+        <!-- Card Cadastros Rápidos -->
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h5>➕ Cadastros Rápidos</h5>
+            <a href="/cadastro_cliente" class="btn-voltar" style="width: 100%; text-align: center; margin-bottom: 5px;">Cadastrar Cliente</a>
+            <a href="/vendedores" class="btn-voltar" style="width: 100%; text-align: center; margin-bottom: 5px;">Cadastrar Vendedor</a>
+            <a href="/estoque" class="btn-voltar" style="width: 100%; text-align: center; margin-bottom: 5px;">Cadastrar Produto</a>
+            <a href="/fornecedores" class="btn-voltar" style="width: 100%; text-align: center;">Cadastrar Fornecedor</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

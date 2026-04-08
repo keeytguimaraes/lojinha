@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block conteudo %}
+        <h2>👤 Registro de Usuário (ADM)</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" action="{{ url_for('auth.registro') }}">
+            <input type="text" name="nome" placeholder="Nome de usuário" required maxlength="100">
+            
+            <div style="position: relative;">
+                <input type="password" id="senha-registro" name="senha" placeholder="Senha" required minlength="6" style="padding-right: 40px;">
+                <span class="eye-icon" onclick="togglePassword('senha-registro')" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #666; font-size: 18px;">👁️</span>
+            </div>
+            <script>
+            function togglePassword(id) {
+                const input = document.getElementById(id);
+                const icon = event.target;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.textContent = '🙈';
+                } else {
+                    input.type = 'password';
+                    icon.textContent = '👁️';
+                }
+            }
+            </script>
+            <select name="tipo_login" required>
+                <option value="">Selecione tipo</option>
+                <option value="1">ADM (acesso total)</option>
+                <option value="2">VENDEDOR (limitado)</option>
+            </select>
+            
+            <button type="submit">Criar Usuário</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 20px;">
+            <a href="{{ url_for('index') }}" class="btn-voltar">← Voltar</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

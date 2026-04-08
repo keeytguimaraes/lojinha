@@ -1,27 +1,5 @@
-{% extends 'base.html' %}
 
-{% block conteudo %}
-<!-- Título e botão voltar (opcional: pode colocar na mesma linha depois) -->
-<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
-    <h2>Vendedores</h2>
-    <button type="button" class="botao" onclick="history.back()">← Voltar</button>
-</div>
-
-<input type="text" id="search-input" placeholder="Buscar por nome..." style="margin-bottom:10px; padding:5px 10px; width:200px;">
-<div id="sugestoes-box" class="lista-sugestoes"></div>
-
-<script src="{{ url_for('static', filename='js/search.js') }}"></script>
-
-<!-- Tabela de vendedores -->
-<table id="tabela-vendedores">
-<tr>
-    <th>ID</th>
-    <th>Nome</th>
-    <th>CPF</th>
-    <th>Email</th>
-    <th>Data de nascimento</th>
-    <th>Ações</th>
-</tr>
+<th>Login</th>
 
 {% for vendedor in vendedores %}
 <tr>
@@ -29,24 +7,20 @@
     <td>{{ vendedor.nome }}</td>
     <td>{{ vendedor.cpf }}</td>
     <td>{{ vendedor.email }}</td>
-  <!-- DATA CORRIGIDA -->
-  <td>
-    {% if vendedor.data_nascimento %}
-        {{ vendedor.data_nascimento.strftime("%d/%m/%Y") }}
-    {% else %}
-        -
-    {% endif %}
-</td>
+
     <td>
-        <a href="{{ url_for('vendedor.excluir_vendedor_route', id=vendedor.id) }}">
-            <button>Excluir</button>
-        </a>
-        <a href="{{ url_for('vendedor.editar_vendedor', id=vendedor.id) }}">
-            <button>Alterar</button>
-        </a>
+        {% if vendedor.data_nascimento %}
+            {{ vendedor.data_nascimento.strftime("%d/%m/%Y") }}
+        {% else %}
+            -
+        {% endif %}
+    </td>
+
+    <td>{{ vendedor.login_nome }}</td>
+
+    <td>
+        <a href="{{ url_for('vendedor.excluir_vendedor_route', id=vendedor.id) }}" class="btn">Excluir</a>
+        <a href="{{ url_for('vendedor.editar_vendedor', id=vendedor.id) }}" class="btn">Alterar</a>
     </td>
 </tr>
 {% endfor %}
-</table>
-
-{% endblock %}

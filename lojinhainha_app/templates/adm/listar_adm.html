@@ -7,13 +7,7 @@
     <button type="button" class="botao" onclick="history.back()">← Voltar</button>
 </div>
 
-<!-- INPUT DE BUSCA -->
-<input type="text" id="search-input" placeholder="Buscar por nome..." style="margin-bottom:10px; padding:5px 10px; width:200px;">
-
-<!-- CAIXA DE SUGESTÕES -->
-<div id="sugestoes-box" class="lista-sugestoes"></div>
-
-<!-- TABELA -->
+<!-- Tabela -->
 <table id="tabela-adms">
 <tr>
     <th>ID</th>
@@ -49,7 +43,6 @@
 {% endfor %}
 </table>
 
-<!-- JS -->
 <script src="{{ url_for('static', filename='js/search_adms.js') }}"></script>
 
 {% endblock %}

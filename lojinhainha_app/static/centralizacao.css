@@ -1,0 +1,25 @@
+/* CENTRALIZA CONTEÚDO (formulários, login, etc) */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* respeita a topbar */
+}
+
+/* CAIXA PADRÃO */
+.box {
+    width: 100%;
+    max-width: 500px;
+}
+
+/* CENTRALIZA TABELA */
+.table-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+/* TABELA CENTRAL */
+table {
+    width: 80%;
+}

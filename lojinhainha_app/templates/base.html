@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Lojinhainha</title>
+
     <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- CSS -->
+
+    <!-- CSS (ORDEM CORRETA) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='centralizacao.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='layout.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='menu.css') }}">
@@ -15,49 +15,84 @@
 
 <body>
 
-    <!-- 🔹 TOPO -->
-    <div class="topbar">
-        <div class="menu-btn" onclick="toggleMenu()">☰</div>
-        <h4>Lojinhainha</h4>
+{% if session.get('usuario') %}
+
+    <!-- 🔵 TOP BAR -->
+    <div class="top-bar">
+
+        <!-- ☰ -->
+        <div class="menu-icon" onclick="toggleSidebar()">☰</div>
+
+        <!-- 👤 USUÁRIO -->
+        {% if request.endpoint != 'auth.login' %}
+        <div class="user-bar">
+            <span>👤 Bem-vindo {{ session['usuario'] }}</span>
+            <a href="{{ url_for('auth.logout') }}" class="btn-logout">Sair</a>
+        </div>
+        {% endif %}
+
     </div>
 
-    <!-- 🔹 MENU LATERAL -->
-    <div class="sidebar" id="sidebar">
-        <h4>Lojinhainha</h4>
-        <hr>
-        <a href="/" class="btn-voltar-sidebar">🏠 Início</a>
-        <hr>
-        <h6 onclick="toggleSection('tabelas')" style="cursor:pointer;">📋 Ver Tabelas</h6>
-        <div id="tabelas">
-            <a href="/clientes">Clientes</a>
-            <a href="/lista_fornecedores">Fornecedores</a>
-            <a href="/lista_vendedores">Vendedores</a>
-            <a href="/lista_estoque">Estoque</a>
-            <a href="/lista_vendas">Vendas</a>
-            <a href="{{ url_for('adm.listar') }}">ADM</a>
+    <!-- 🟣 SIDEBAR -->
+    <div id="sidebar" class="sidebar">
+
+        <!-- HOME -->
+        <a href="/">🏠 Home</a>
+
+        <!-- 🔽 VER CADASTROS -->
+        <div class="menu-section">
+            <div class="menu-title" onclick="toggleSubmenu('cadastros')">
+                📋 Ver Cadastros
+            </div>
+
+            <div id="cadastros" class="submenu">
+
+                <a href="/cadastro_cliente">Clientes</a>
+                <a href="/estoque">Estoque</a>
+                <a href="/vendas">Vendas</a>
+
+                {% if session.get('tipo_login')|int == 1 %}
+                    <a href="/vendedores">Vendedores</a>
+                    <a href="/fornecedores">Fornecedores</a>
+                {% endif %}
+
+                {% if session.get('tipo_login')|int == 1 %}
+                    <a href="/adms">ADM</a>
+                {% endif %}
+
+            </div>
         </div>
 
-        <hr>
+        <!-- 🔽 TABELAS -->
+        <div class="menu-section">
+            <div class="menu-title" onclick="toggleSubmenu('tabelas')">
+                📊 Tabelas
+            </div>
 
-        <h6 onclick="toggleSection('cadastros')" style="cursor:pointer;">➕ Ver  Cadastros</h6>
-        <div id="cadastros">
-            <a href="/cadastro_cliente">Cadastrar Cliente</a>
-            <a href="/vendedores">Cadastrar Vendedor</a>
-            <a href="/estoque">Cadastrar Estoque</a>
-            <a href="/fornecedores">Cadastrar Fornecedor</a>
-            <a href="/vendas">Registrar Venda</a>
-            <a href="{{ url_for('adm.cadastrar') }}">Registrar Administradores</a>
+            <div id="tabelas" class="submenu">
+                <a href="/clientes">Clientes</a>
+                <a href="/lista_estoque">Estoque</a>
+                <a href="/lista_vendas">Vendas</a>
+
+                {% if session.tipo_login == 1 %}
+                    <a href="/lista_fornecedores">Fornecedores</a>
+                    <a href="/lista_vendedores">Vendedores</a>
+                {% endif %}
+
+            </div>
         </div>
+
     </div>
 
-    <!-- 🔹 CONTEÚDO -->
-    <div class="content" id="content">
-        {% block conteudo %}
-        {% endblock %}
-    </div>
+{% endif %}
 
-    <!-- 🔹 JS -->
-    <script src="{{ url_for('static', filename='js/validacoes.js') }}"></script>
+<!-- 🔴 CONTEÚDO -->
+<div class="content">
+    {% block conteudo %}{% endblock %}
+</div>
+
+<!-- JS -->
+<script src="{{ url_for('static', filename='js/menu.js') }}"></script>
 
 </body>
 </html>

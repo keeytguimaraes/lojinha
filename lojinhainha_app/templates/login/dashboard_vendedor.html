@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+<div style="padding-top: 20px;">
+    <h1>🏪 Bem-vindo Vendedor</h1>
+    <p>Bem-vindo, {{ session.nome }}! Acesso limitado (Clientes, Estoque, Vendas).</p>
+
+    <!-- Cards de acesso vendedor -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
+        <!-- Card Clientes -->
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h5>👥 Clientes</h5>
+            <a href="/cadastro_cliente" class="btn-voltar" style="width: 100%; text-align: center; margin-bottom: 5px;">Cadastrar Cliente</a>
+            <a href="/clientes" class="btn-voltar" style="width: 100%; text-align: center;">Listar Clientes</a>
+        </div>
+
+        <!-- Card Estoque -->
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h5>📦 Estoque</h5>
+            <a href="/estoque" class="btn-voltar" style="width: 100%; text-align: center; margin-bottom: 5px;">Adicionar Produto</a>
+            <a href="/lista_estoque" class="btn-voltar" style="width: 100%; text-align: center;">Listar Estoque</a>
+        </div>
+
+        <!-- Card Vendas -->
+        <div style="background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <h5>💰 Vendas</h5>
+            <a href="/vendas" class="btn-voltar" style="width: 100%; text-align: center; margin-bottom: 5px;">Registrar Venda</a>
+            <a href="/lista_vendas" class="btn-voltar" style="width: 100%; text-align: center;">Listar Vendas</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

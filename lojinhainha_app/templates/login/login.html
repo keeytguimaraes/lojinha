@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+
+{% block conteudo %}
+        <h2>🔐 Login</h2>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="POST" action="{{ url_for('auth.login') }}">
+            
+            <input type="text" name="nome" placeholder="Nome de usuário" required maxlength="100">
+            
+            <!-- CAMPO DE SENHA CORRIGIDO -->
+            <div class="password-container">
+                <input type="password" id="senha-login" name="senha" placeholder="Senha" required>
+                <span class="toggle-password" onclick="togglePassword('senha-login', this)">👁️</span>
+            </div>
+
+            <button type="submit">Entrar</button>
+        </form>
+        
+        <p style="text-align: center; margin-top: 20px;">
+            <em>Só ADM pode registrar novos usuários.</em>
+        </p>
+    </div>
+</div>
+
+<script>
+function togglePassword(id, element) {
+    const input = document.getElementById(id);
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        element.textContent = '🙈';
+    } else {
+        input.type = 'password';
+        element.textContent = '👁️';
+    }
+}
+</script>
+
+{% endblock %}

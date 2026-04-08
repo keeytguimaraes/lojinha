@@ -1,13 +1,27 @@
 from database.connection import get_db
+from werkzeug.security import generate_password_hash
 
-def atualizar_adm(id, nome, cpf, email, data_nascimento):
+def atualizar_adm(id, nome, cpf, email, data_nascimento, login_nome=None, login_senha=None):
     db = get_db()
     cursor = db.cursor()
 
+    # Atualiza dados do ADM
     cursor.execute("""
         UPDATE adm
-        SET nome = %s, cpf = %s, email = %s, data_nascimento = %s
-        WHERE id = %s
+        SET nome=%s, cpf=%s, email=%s, data_nascimento=%s
+        WHERE id=%s
     """, (nome, cpf, email, data_nascimento, id))
 
+    # Atualiza login se fornecido
+    if login_nome or login_senha:
+        cursor.execute("SELECT login_id FROM adm WHERE id=%s", (id,))
+        login_id = cursor.fetchone()[0]
+
+        if login_nome:
+            cursor.execute("UPDATE login SET nome=%s WHERE id=%s", (login_nome, login_id))
+        if login_senha:
+            senha_hash = generate_password_hash(login_senha)
+            cursor.execute("UPDATE login SET senha=%s WHERE id=%s", (senha_hash, login_id))
+
     db.commit()
+    db.close()

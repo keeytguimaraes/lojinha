@@ -5,11 +5,16 @@
 <h2>Editar Administrador</h2>
 
 <form method="POST" action="/adms/editar/{{ adm.id }}">
+    <!-- Dados do ADM -->
     <input name="nome" value="{{ adm.nome }}" required>
     <input name="cpf" value="{{ adm.cpf }}" required>
     <input type="email" name="email" value="{{ adm.email }}">
     <input type="date" name="data_nascimento"
            value="{{ adm.data_nascimento.strftime('%Y-%m-%d') if adm.data_nascimento }}">
+
+    <!-- Login do sistema (opcional alterar) -->
+    <input type="text" name="login_nome" placeholder="Nome de usuário (opcional)" value="{{ adm.login_nome }}">
+    <input type="password" name="login_senha" placeholder="Nova senha (opcional)">
 
     <button type="submit">Salvar</button>
 

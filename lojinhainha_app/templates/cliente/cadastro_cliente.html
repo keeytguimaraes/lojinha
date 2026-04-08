@@ -9,7 +9,7 @@
     <form action="/add_cliente" method="POST">
         <!-- Dados do cliente -->
         <input type="text" name="nome" placeholder="Nome do cliente" required>
-        <input type="number" name="cpf" placeholder="CPF" required>
+        <input type="text" name="cpf" placeholder="CPF" maxlength="11" pattern="\d{11}" required>
         <input type="email" name="email" placeholder="Email">
         <input type="date" name="data_nascimento">
 

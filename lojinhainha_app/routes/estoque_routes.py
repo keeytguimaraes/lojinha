@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, request, redirect
+from routes.auth_routes import login_required
 from models.estoque.estoque_insert import inserir_estoque
 from models.estoque.estoque_select import listar_estoque
 from models.estoque.estoque_update import atualizar_estoque
@@ -9,12 +10,14 @@ estoque_bp = Blueprint("estoque", __name__)
 
 # Tela cadastro de estoque
 @estoque_bp.route("/estoque")
+@login_required
 def estoque():
     return render_template("estoque/estoque.html",
      fornecedores=listar_fornecedores())
 
 # Inserir estoque
 @estoque_bp.route("/add_estoque", methods=["POST"])
+@login_required
 def add_estoque():
     inserir_estoque(
         request.form["quantidade_calcas"],

@@ -1,50 +1,23 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Lojinhainha</title>
-    <link rel="icon" type="image/png" href="{{ url_for('static', filename='favicon.png') }}">
-    <!-- CSS principal -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
+{% extends "base.html" %}
 
-<body>
-    <!-- 🔵 MENU SUPERIOR -->
-    <div class="top-bar">
-        <div class="menu-icon" onclick="toggleMenu()">☰</div>
-        <div id="menu" class="menu">
-            <!-- Links rápidos para tabelas -->
-            <a href="/clientes">Clientes</a>
-            <a href="/lista_vendedores">Vendedores</a>
-            <a href="/lista_estoque">Estoque</a>
-            <a href="/lista_fornecedores">Fornecedores</a>
-            <a href="/lista_vendas">Vendas</a>
-            <a href="/adms">ADM</a>
-        </div>
-    </div>
-
-    <!-- 🟢 CONTEÚDO PRINCIPAL -->
-    <div class="container">
-        <h1>Bem-vindo à Lojinhainha 🛍️</h1>
-        <p>Gerencie seu sistema de forma simples e rápida</p>
-
-        <div class="botoes">
-            <!-- Botões para acesso rápido aos cadastros e registros -->
+{% block conteudo %}
+<div class="container">
+    <h1>Bem-vindo à Lojinhainha 🛍️</h1>
+    <p>Gerencie seu sistema de forma simples e rápida</p>
+    <div class="botoes">
+        <!-- Botões visíveis para ADM ou Vendedor -->
+        {% if session.tipo_login == 1 or session.tipo_login == 2 %}
             <a href="/cadastro_cliente"><button>🧾 Cadastro Cliente</button></a>
-            <a href="/vendedores"><button>👨‍💼 Cadastro Vendedor</button></a>
             <a href="/estoque"><button>📦 Cadastro Estoque</button></a>
-            <a href="/fornecedores"><button>🏢 Cadastro Fornecedor</button></a>
             <a href="/vendas"><button>💰 Registrar Venda</button></a>
-            <a href="/adms/novo"><button>👑 Cadastro ADM</button></a>
-        </div>
-    </div>
+        {% endif %}
 
-    <!-- SCRIPT PARA ABRIR/FECHAR MENU -->
-    <script>
-        function toggleMenu() {
-            var menu = document.getElementById("menu");
-            menu.classList.toggle("show");
-        }
-    </script>
-</body>
-</html>
+        <!-- Botões exclusivos do ADM -->
+        {% if session.tipo_login == 1 %}
+            <a href="/vendedores"><button>👨‍💼 Cadastro Vendedor</button></a>
+            <a href="/fornecedores"><button>🏢 Cadastro Fornecedor</button></a>
+            <a href="/adms/novo"><button>👑 Cadastro ADM</button></a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

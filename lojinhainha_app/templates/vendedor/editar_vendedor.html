@@ -1,20 +1,25 @@
 {% extends 'base.html' %}
 
 {% block conteudo %}
-<!-- Template para editar um vendedor existente -->
 
 <h2>Editar Vendedor</h2>
 
 <form method="POST" action="/atualizar_vendedor/{{ vendedor.id }}">
+    <!-- Dados do perfil -->
     <input name="nome" value="{{ vendedor.nome }}" required>
     <input name="cpf" value="{{ vendedor.cpf }}" required>
     <input type="email" name="email" value="{{ vendedor.email }}" placeholder="Email">
     <input type="date" name="data_nascimento" 
            value="{{ vendedor.data_nascimento.strftime('%Y-%m-%d') if vendedor.data_nascimento }}">
+
+    <!-- Dados de login -->
+    <h3>Login do Sistema</h3>
+    <input type="text" name="login_nome" value="{{ vendedor.login_nome }}" placeholder="Nome de usuário" required>
+    <input type="password" name="login_senha" placeholder="Nova senha (deixe em branco para não alterar)">
+
     <button type="submit">Salvar</button>
     <div style="display: inline-block; margin-left: 10px;">
         <button type="button" class="botao" onclick="history.back()">Voltar</button>
     </div>
 </form>
-
 {% endblock %}
