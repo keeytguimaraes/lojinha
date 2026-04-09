@@ -8,7 +8,6 @@
         <!-- Botões visíveis para ADM ou Vendedor -->
         {% if session.tipo_login == 1 or session.tipo_login == 2 %}
             <a href="/cadastro_cliente"><button>🧾 Cadastro Cliente</button></a>
-            <a href="/estoque"><button>📦 Cadastro Estoque</button></a>
             <a href="/vendas"><button>💰 Registrar Venda</button></a>
         {% endif %}
 
@@ -16,6 +15,7 @@
         {% if session.tipo_login == 1 %}
             <a href="/vendedores"><button>👨‍💼 Cadastro Vendedor</button></a>
             <a href="/fornecedores"><button>🏢 Cadastro Fornecedor</button></a>
+            <a href="/estoque"><button>📦 Cadastro Estoque</button></a>
             <a href="/adms/novo"><button>👑 Cadastro ADM</button></a>
         {% endif %}
     </div>

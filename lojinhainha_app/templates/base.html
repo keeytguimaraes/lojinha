@@ -48,12 +48,12 @@
             <div id="cadastros" class="submenu">
 
                 <a href="/cadastro_cliente">Cadastrar Clientes</a>
-                <a href="/estoque">Cadastrar Estoque</a>
                 <a href="/vendas">Registrar Vendas</a>
 
                 {% if session.get('tipo_login')|int == 1 %}
                     <a href="/vendedores">Cadastrar Vendedores</a>
                     <a href="/fornecedores">Cadastrar Fornecedores</a>
+                    <a href="/estoque">Cadastrar Estoque</a>
                     <a href="/adms/novo">Cadastrar ADM</a>
                 {% endif %}
 
