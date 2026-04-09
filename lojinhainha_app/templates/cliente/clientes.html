@@ -2,8 +2,8 @@
 
 {% block conteudo %}
 
-<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
-    <h2>Clientes</h2>
+<div class="container">
+    <h2>🧾 Lista de Clientes</h2>
     <button type="button" class="botao" onclick="history.back()">← Voltar</button>
 </div>
 
@@ -13,7 +13,8 @@
 <!-- CAIXA DE SUGESTÕES -->
 <div id="sugestoes-box" class="lista-sugestoes"></div>
 
-<!-- TABELA -->
+{% if clientes %}
+<!-- ✅ ADICIONADO empty-state para listas vazias - pattern consistente -->
 <table id="tabela-clientes">
 <tr>
     <th>ID</th>
@@ -54,6 +55,12 @@
 </tr>
 {% endfor %}
 </table>
+{% else %}
+<div class="empty-state">
+    <h3>📭 Nenhum cliente cadastrado</h3>
+    <p>Use o sidebar para cadastrar o primeiro!</p>
+</div>
+{% endif %}
 
 <!-- JS CORRETO -->
 <script src="{{ url_for('static', filename='js/search_clientes.js') }}"></script>

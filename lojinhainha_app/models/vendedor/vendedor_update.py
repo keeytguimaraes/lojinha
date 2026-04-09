@@ -2,22 +2,25 @@ from database.connection import get_db
 from werkzeug.security import generate_password_hash
 
 def atualizar_vendedor(id, nome, cpf, email, data_nascimento, login_nome=None, login_senha=None):
+    """
+    Atualiza os dados do vendedor.
+    Se forem passados login_nome ou login_senha, atualiza também o login.
+    """
     db = get_db()
     cursor = db.cursor()
 
     # Atualiza dados do vendedor
     cursor.execute(
         """
-        UPDATE vendedor 
-        SET nome=%s, cpf=%s, email=%s, data_nascimento=%s 
+        UPDATE vendedor
+        SET nome=%s, cpf=%s, email=%s, data_nascimento=%s
         WHERE id=%s
         """,
         (nome, cpf, email, data_nascimento, id)
     )
 
-    # Atualiza login se fornecido
+    # Atualiza login, se fornecido
     if login_nome or login_senha:
-        # pega o login_id do vendedor
         cursor.execute("SELECT login_id FROM vendedor WHERE id=%s", (id,))
         login_id = cursor.fetchone()[0]
 

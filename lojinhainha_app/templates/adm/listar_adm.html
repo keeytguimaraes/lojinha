@@ -2,12 +2,18 @@
 
 {% block conteudo %}
 
-<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
-    <h2>Administradores</h2>
+<div class="container">
+    <h2>👑 Lista de Adiministradores</h2>
     <button type="button" class="botao" onclick="history.back()">← Voltar</button>
 </div>
+<!-- INPUT DE BUSCA -->
+<input type="text" id="search-input" placeholder="Buscar por nome..." style="margin-bottom:10px; padding:5px 10px; width:200px;">
 
-<!-- Tabela -->
+<!-- CAIXA DE SUGESTÕES -->
+<div id="sugestoes-box" class="lista-sugestoes"></div>
+
+{% if adms %}
+<!-- ✅ ADICIONADO empty-state para listas vazias - pattern consistente com vendedor lista -->
 <table id="tabela-adms">
 <tr>
     <th>ID</th>
@@ -15,6 +21,8 @@
     <th>CPF</th>
     <th>Email</th>
     <th>Data de nascimento</th>
+    <th>Login</th>
+    <th>Senha</th>
     <th>Ações</th>
 </tr>
 
@@ -31,6 +39,8 @@
             -
         {% endif %}
     </td>
+    <td>{{ adm.login_nome }}</td>
+    <td>********</td>
     <td>
         <a href="/adms/deletar/{{ adm.id }}">
             <button>Excluir</button>
@@ -42,6 +52,12 @@
 </tr>
 {% endfor %}
 </table>
+{% else %}
+<div class="empty-state">
+    <h3>📭 Nenhum administrador cadastrado</h3>
+    <p>Use o sidebar para cadastrar o primeiro!</p>
+</div>
+{% endif %}
 
 <script src="{{ url_for('static', filename='js/search_adms.js') }}"></script>
 

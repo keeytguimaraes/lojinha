@@ -3,8 +3,8 @@
 {% block conteudo %}
 
 <!-- Título e botão Voltar -->
-<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
-    <h2>Fornecedores</h2>
+<div class="container">
+    <h2>🏢 Lista de Fornecedores</h2>
     <button type="button" class="botao" onclick="history.back()">← Voltar</button>
 </div>
 
@@ -14,7 +14,8 @@
 <!-- Caixa de sugestões -->
 <div id="sugestoes-box" class="lista-sugestoes"></div>
 
-<!-- Tabela -->
+{% if fornecedores %}
+<!-- ✅ ADICIONADO empty-state para listas vazias - pattern consistente -->
 <table id="tabela-fornecedores">
 <tr>
     <th>ID</th>
@@ -60,6 +61,12 @@
 </tr>
 {% endfor %}
 </table>
+{% else %}
+<div class="empty-state">
+    <h3>📭 Nenhum fornecedor cadastrado</h3>
+    <p>Use o sidebar para cadastrar o primeiro!</p>
+</div>
+{% endif %}
 
 <!-- JS SEMPRE NO FINAL -->
 <script src="{{ url_for('static', filename='js/search_fornecedores.js') }}"></script>

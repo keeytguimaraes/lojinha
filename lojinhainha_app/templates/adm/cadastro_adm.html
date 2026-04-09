@@ -5,7 +5,7 @@
 <h2>Cadastrar Administrador</h2>
 
 <div class="form-container">
-    <form action="/add_adms" method="POST">
+    <form action="{{ url_for('adm.cadastrar') }}" method="POST">
 
         <!-- Dados do ADM -->
         <label>Nome</label>
@@ -30,7 +30,7 @@
 
         <label>Senha</label>
         <div class="password-container">
-            <input type="password" id="senha-login" name="senha" placeholder="Senha de login" required>
+            <input type="password" id="senha-login" name="login_senha" placeholder="Senha de login" required>
             <span class="toggle-password" onclick="togglePassword('senha-login', this)">👁️</span>
         </div>
 

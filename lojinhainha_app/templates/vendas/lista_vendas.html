@@ -2,8 +2,8 @@
 
 {% block conteudo %}
 
-<div class="titulo-tabela" style="display:flex; justify-content: space-between; align-items:center; margin-bottom:10px;">
-    <h2>Vendas</h2>
+<div class="container">
+    <h2>💰 Lista de Vendas</h2>
     <button type="button" class="botao" onclick="history.back()">← Voltar</button>
 </div>
 
@@ -12,6 +12,8 @@
 
 <script src="{{ url_for('static', filename='js/search_vendas.js') }}"></script>
 
+{% if vendas %}
+<!-- ✅ ADICIONADO empty-state para listas vazias - pattern consistente -->
 <table id="tabela-vendas">
 <tr>
     <th>ID</th>
@@ -60,5 +62,11 @@
 </tr>
 {% endfor %}
 </table>
+{% else %}
+<div class="empty-state">
+    <h3>📭 Nenhuma venda registrada</h3>
+    <p>Use o sidebar para registrar a primeira!</p>
+</div>
+{% endif %}
 
 {% endblock %}

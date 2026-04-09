@@ -47,17 +47,14 @@
 
             <div id="cadastros" class="submenu">
 
-                <a href="/cadastro_cliente">Clientes</a>
-                <a href="/estoque">Estoque</a>
-                <a href="/vendas">Vendas</a>
+                <a href="/cadastro_cliente">Cadastrar Clientes</a>
+                <a href="/estoque">Cadastrar Estoque</a>
+                <a href="/vendas">Registrar Vendas</a>
 
                 {% if session.get('tipo_login')|int == 1 %}
-                    <a href="/vendedores">Vendedores</a>
-                    <a href="/fornecedores">Fornecedores</a>
-                {% endif %}
-
-                {% if session.get('tipo_login')|int == 1 %}
-                    <a href="/adms">ADM</a>
+                    <a href="/vendedores">Cadastrar Vendedores</a>
+                    <a href="/fornecedores">Cadastrar Fornecedores</a>
+                    <a href="/adms/novo">Cadastrar ADM</a>
                 {% endif %}
 
             </div>
@@ -77,7 +74,9 @@
                 {% if session.tipo_login == 1 %}
                     <a href="/lista_fornecedores">Fornecedores</a>
                     <a href="/lista_vendedores">Vendedores</a>
+                    <a href="/adms">ADM</a>
                 {% endif %}
+<!-- ✅ FIX: /listar_adm → /adms (rota real listar()), /cadstro_adm → /adms/novo (typo + correto). Resolve 404 ADM sidebar -->
 
             </div>
         </div>
