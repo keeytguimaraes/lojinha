@@ -18,3 +18,20 @@ def listar_adms():
     dados = cursor.fetchall()
     db.close()
     return dados
+
+
+def buscar_adm_por_id(id):
+    """
+    Busca um administrador pelo ID.
+    """
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+
+    cursor.execute(
+        "SELECT * FROM adm WHERE id = %s",
+        (id,)
+    )
+
+    dado = cursor.fetchone()
+    db.close()
+    return dado
