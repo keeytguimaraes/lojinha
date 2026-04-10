@@ -77,9 +77,24 @@ def editar_vendedor(id):
     """
     Busca o vendedor pelo ID e envia para a página de edição.
     """
-    vendedor = next((v for v in listar_vendedores() if v["id"] == id), None)
-    return render_template("vendedor/editar_vendedor.html", vendedor=vendedor)
+    from database.connection import get_db
 
+    db = get_db()
+    cursor = db.cursor(dictionary=True)
+
+    # 🔥 JOIN com login para trazer nome e senha
+    cursor.execute("""
+        SELECT vendedor.*, login.nome AS login_nome, login.senha AS login_senha
+        FROM vendedor
+        JOIN login ON vendedor.login_id = login.id
+        WHERE vendedor.id = %s
+    """, (id,))
+
+    vendedor = cursor.fetchone()
+
+    db.close()
+
+    return render_template("vendedor/editar_vendedor.html", vendedor=vendedor)
 
 # 🔹 ATUALIZAR VENDEDORES
 @vendedor_bp.route("/atualizar_vendedor/<int:id>", methods=["POST"])

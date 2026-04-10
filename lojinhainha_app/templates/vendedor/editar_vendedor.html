@@ -16,13 +16,13 @@
 
     <!-- Login -->
     <h3>Login do Sistema</h3>
-    <label>Nome de usuário</label>
-    <input type="text" name="login_nome" value="{{ vendedor.login_nome }}" placeholder="Nome de usuário" required>
+    <label>Login</label>
+<input name="nome_login" value="{{ vendedor.nome }}">
 
     <!-- Senha -->
     <label>Senha</label>
     <div class="password-container">
-        <input type="password" id="login_senha" name="login_senha" placeholder="Nova senha (deixe em branco para não alterar)">
+        <input name="senha" value="{{ vendedor.senha }}" placeholder="Nova senha (deixe em branco para não alterar)">
         <span class="toggle-password" onclick="togglePassword('login_senha', this)">👁️</span>
     </div>
 
@@ -43,3 +43,4 @@ function togglePassword(id, element) {
 }
 </script>
 {% endblock %}
+

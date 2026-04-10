@@ -8,13 +8,9 @@ def listar_vendedores():
     cursor = db.cursor(dictionary=True)
 
     cursor.execute("""
-        SELECT 
-    v.id,
-    v.nome,
-    v.cpf,
-    v.email,
-    v.data_nascimento
-    FROM vendedor v
+    SELECT vendedor.*, login.nome AS login_nome
+    FROM vendedor
+    JOIN login ON vendedor.login_id = login.id
     """)
 
     dados = cursor.fetchall()
