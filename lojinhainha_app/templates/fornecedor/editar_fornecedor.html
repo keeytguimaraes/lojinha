@@ -6,16 +6,26 @@
 <h2>Editar Fornecedor</h2>
 
 <form method="POST" action="/atualizar_fornecedor/{{ fornecedor.id }}">
+    <label>Nome da empresa</label>
     <input name="nome_empresa" value="{{ fornecedor.nome_empresa }}" required>
+    <label>CNPJ</label>
     <input name="cnpj" value="{{ fornecedor.cnpj }}" required>
+    <label>Quantidade do produto</label>
     <input type="number" name="produto_quantidade" value="{{ fornecedor.produto_quantidade }}" required>
+    <label>Preço (por unidade)</label>
     <input type="number" step="0.01" name="preco" value="{{ fornecedor.preco }}" required>
 
     <!-- ENDEREÇO -->
+    <h3>Endereço</h3>
+    <label>Rua</label>
     <input type="text" name="rua" value="{{ fornecedor.rua }}" required>
+    <label>Bairro</label>
     <input type="text" name="bairro" value="{{ fornecedor.bairro }}" required>
+    <label>Número</label>
     <input type="number" name="numero" value="{{ fornecedor.numero }}" required>
+    <label>Cidade</label>
     <input type="text" name="cidade" value="{{ fornecedor.cidade }}" required>
+    <label>Complemento</label>
     <input type="text" name="complemento" value="{{ fornecedor.complemento }}">
 
     <button type="submit">Salvar</button>

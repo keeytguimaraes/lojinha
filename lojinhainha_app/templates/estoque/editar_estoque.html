@@ -8,6 +8,7 @@
 <form method="POST" action="{{ url_for('estoque.atualizar_estoque_route', id=item.id) }}">
 
     <!-- AUTOCOMPLETE FORNECEDOR -->
+    <label>Digite o fornecedor</label>
     <input type="text" id="fornecedor_input" placeholder="Digite o fornecedor" required
     value="{{ item.nome_empresa }}"
     data-fornecedores='{{ fornecedores | tojson | safe }}'>
@@ -21,9 +22,11 @@
     <script src="{{ url_for('static', filename='js/autocomplete_fornecedor.js') }}"></script>
 
     <!-- Quantidade -->
+    <label>Quantidade</label>
     <input type="number" name="quantidade_calcas" value="{{ item.quantidade_calcas }}" required>
 
     <!-- Preço -->
+    <label>Preço por unidade</label>
     <input type="number" step="0.01" name="preco_venda" value="{{ item.preco_venda }}" required>
     <button type="submit">Salvar</button>
     <div style="display: inline-block; margin-left: 10px;">

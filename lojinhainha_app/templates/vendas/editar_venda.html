@@ -6,15 +6,18 @@
 
 <form method="POST" action="/atualizar_venda/{{ venda.id }}">
     <!-- CLIENTE -->
+    <label>Digite o cliente</label>
     <input type="text" id="cliente_input" placeholder="Digite o cliente" required
            value="{{ venda.cliente }}"
            data-clientes='{{ clientes | tojson | safe }}'>
     <input type="hidden" name="cliente_id" id="cliente_id" value="{{ venda.cliente_id }}">
+    <label>CPF</label>
     <input type="text" name="cpf" id="cpf" value="{{ venda.cpf }}" readonly required>
     <div id="sugestoes" class="lista-sugestoes"></div>
     <script src="{{ url_for('static', filename='js/autocomplete_cliente.js') }}"></script>
 
     <!-- VENDEDOR -->
+    <label>Digite o vendedor</label>
     <input type="text" id="vendedor_input" placeholder="Digite o vendedor" required
            value="{{ venda.vendedor }}"
            data-clientes='{{ vendedores | tojson | safe }}'>
@@ -23,9 +26,11 @@
     <script src="{{ url_for('static', filename='js/autocomplete_vendedor.js') }}"></script>
 
     <!-- QUANTIDADE -->
+    <label>Quantidade</label>
     <input type="number" id="quantidade" name="quantidade_vendas" value="{{ venda.quantidade_vendas }}" required oninput="calcularPreco()">
 
     <!-- DATA -->
+    <label>Data da venda</label>
     <input type="date" name="data" value="{{ venda.data.strftime('%Y-%m-%d') }}" required>
 
     <!-- BOTÕES -->

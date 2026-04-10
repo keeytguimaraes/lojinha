@@ -5,16 +5,22 @@
 
 <form method="POST" action="/atualizar_adm/{{ adm.id }}">
     <!-- Perfil -->
+    <label>Nome</label>
     <input name="nome" value="{{ adm.nome }}" required>
+    <label>CPF</label>
     <input name="cpf" value="{{ adm.cpf }}" required>
+    <label>Email</label>
     <input type="email" name="email" value="{{ adm.email }}" placeholder="Email">
+    <label>Data de nascimento</label>
     <input type="date" name="data_nascimento" value="{{ adm.data_nascimento.strftime('%Y-%m-%d') if adm.data_nascimento }}">
 
     <!-- Login -->
     <h3>Login do Sistema</h3>
+    <label>Nome de usuário</label>
     <input type="text" name="login_nome" value="{{ adm.login_nome }}" placeholder="Nome de usuário" required>
 
     <!-- Senha -->
+    <label>Senha</label>
     <div class="password-container">
         <input type="password" id="login_senha" name="login_senha" placeholder="Nova senha (deixe em branco para não alterar)">
         <span class="toggle-password" onclick="togglePassword('login_senha', this)">👁️</span>

@@ -21,6 +21,16 @@ O controle de acesso é realizado por meio de sessões do Flask e decorators, ga
 
 O principal objetivo do projeto é facilitar o controle e a organização de um estoque de forma prática, centralizando informações importantes e auxiliando na gestão do negócio de maneira simples e eficiente.
 
+## Acesso ao sistema
+
+### Administrador
+Usuário: admin  
+Senha: admin123  
+
+### Vendedor
+Usuário: vendedor1  
+Senha: vend123  
+
 # Lojinha project
 
 This project consists of the development of a web system for inventory control of a small business (“Lojinhainha”), created as a school project. The application was developed using Python with the Flask framework and a MySQL database.
@@ -44,3 +54,13 @@ Seller (tipo_login = 2): restricted access to certain features
 Access control is handled through Flask sessions and decorators, ensuring that only authenticated and authorized users can access protected routes.
 
 The main objective of this project is to facilitate inventory management in a practical way, centralizing important information and helping manage the business efficiently.
+
+## System Access
+
+### Administrator
+Username: admin  
+Password: admin123  
+
+### Seller
+Username: vendedor1  
+Password: vend123  

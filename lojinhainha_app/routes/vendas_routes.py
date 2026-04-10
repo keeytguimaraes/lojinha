@@ -5,7 +5,7 @@ from models.vendas.vendas_update import atualizar_venda
 from models.vendas.vendas_delete import excluir_venda
 from models.cliente.cliente_select import listar_clientes
 from models.vendedor.vendedor_select import listar_vendedores
-from models.fornecedor.fornecedor_select import listar_fornecedores  # 🔥 NOVO
+from models.fornecedor.fornecedor_select import listar_fornecedores  
 
 vendas_bp = Blueprint("vendas", __name__)
 

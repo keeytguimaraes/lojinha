@@ -6,15 +6,25 @@
 <h2>Editar Cliente</h2>
 
 <form method="POST" action="/atualizar_cliente/{{ cliente.id }}">
+    <label>Nome</label>
     <input name="nome" value="{{ cliente.nome }}" required>
+    <label>CPF</label>
     <input name="cpf" value="{{ cliente.cpf }}" required>
+    <label>Email</label>
     <input type="email" name="email" value="{{ cliente.email }}" placeholder="Email">
+    <label>Data de nascimento</label>
     <input type="date" name="data_nascimento" 
            value="{{ cliente.data_nascimento.strftime('%Y-%m-%d') if cliente.data_nascimento }}">
+    <h3>Endereço</h3>
+    <label>Cidade</label>
     <input name="cidade" value="{{ cliente.cidade }}" required>
+    <label>Rua</label>
     <input name="rua" value="{{ cliente.rua }}" required>
+    <label>Bairro</label>
     <input name="bairro" value="{{ cliente.bairro }}" required>
+    <label>Número</label>
     <input name="numero" value="{{ cliente.numero }}" required>
+    <label>Complemento</label>
     <input type="text" name="complemento" value="{{ cliente.complemento }}">
     <button type="submit">Salvar</button>
 

@@ -53,6 +53,11 @@ def atualizar_fornecedor_route(id):
         request.form["nome_empresa"],
         request.form["cnpj"],
         request.form["produto_quantidade"],
-        request.form["preco"]
+        request.form["preco"],
+        request.form["rua"],
+        request.form["bairro"],
+        request.form["numero"],
+        request.form["cidade"],
+        request.form["complemento"]
     )
     return redirect("/lista_fornecedores")
