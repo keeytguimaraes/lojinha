@@ -39,8 +39,12 @@
                 <td>{{ vendedor.login_nome }}</td>
                 <td>********</td>
                 <td>
-                    <a href="{{ url_for('vendedor.editar_vendedor', id=vendedor.id) }}" class="btn">Editar</a>
-                    <a href="{{ url_for('vendedor.excluir_vendedor_route', id=vendedor.id) }}" class="btn btn-danger" onclick="return confirm('Excluir?')">Excluir</a>
+                    <a href="{{ url_for('vendedor.excluir_vendedor_route', id=vendedor.id) }}">
+                        <button>Excluir</button>
+                    </a>
+                    <a href="{{ url_for('vendedor.editar_vendedor', id=vendedor.id) }}">
+                        <button>Alterar</button>
+                    </a>
                 </td>
             </tr>
             {% endfor %}
