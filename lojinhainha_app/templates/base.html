@@ -17,13 +17,13 @@
 
 {% if session.get('usuario') %}
 
-    <!-- 🔵 TOP BAR -->
+    <!--  TOP BAR -->
     <div class="top-bar">
 
         <!-- ☰ -->
         <div class="menu-icon" onclick="toggleSidebar()">☰</div>
 
-        <!-- 👤 USUÁRIO -->
+        <!--  USUÁRIO -->
         {% if request.endpoint != 'auth.login' %}
         <div class="user-bar">
             <span>👤 Bem-vindo {{ session['usuario'] }}</span>
@@ -33,16 +33,16 @@
 
     </div>
 
-    <!-- 🟣 SIDEBAR -->
+    <!--  SIDEBAR -->
     <div id="sidebar" class="sidebar">
 
         <!-- HOME -->
         <a href="/">🏠 Home</a>
 
-        <!-- 🔽 VER CADASTROS -->
+        <!--  VER CADASTROS -->
         <div class="menu-section">
             <div class="menu-title" onclick="toggleSubmenu('cadastros')">
-                📋 Ver Cadastros
+                📋 Cadastrar
             </div>
 
             <div id="cadastros" class="submenu">
@@ -60,10 +60,10 @@
             </div>
         </div>
 
-        <!-- 🔽 TABELAS -->
+        <!--  TABELAS -->
         <div class="menu-section">
             <div class="menu-title" onclick="toggleSubmenu('tabelas')">
-                📊 Tabelas
+                📊 Ver Cadastros
             </div>
 
             <div id="tabelas" class="submenu">
@@ -76,7 +76,7 @@
                     <a href="/lista_vendedores">Vendedores</a>
                     <a href="/adms">ADM</a>
                 {% endif %}
-<!-- ✅ FIX: /listar_adm → /adms (rota real listar()), /cadstro_adm → /adms/novo (typo + correto). Resolve 404 ADM sidebar -->
+<!--  FIX: /listar_adm → /adms (rota real listar()), /cadstro_adm → /adms/novo (typo + correto). Resolve 404 ADM sidebar -->
 
             </div>
         </div>
@@ -85,7 +85,7 @@
 
 {% endif %}
 
-<!-- 🔴 CONTEÚDO -->
+<!-- CONTEÚDO -->
 <div class="content">
     {% block conteudo %}{% endblock %}
 </div>

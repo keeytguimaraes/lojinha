@@ -1,32 +1,52 @@
 // Espera o carregamento completo do HTML antes de executar o script
+// Garante que todos os elementos da página já existam
 document.addEventListener("DOMContentLoaded", function () {
 
-    // Pega o campo de busca
+    // =========================
+    // ELEMENTOS PRINCIPAIS
+    // =========================
+
+    // Pega o campo de busca onde o usuário digita
     const input = document.getElementById("search-input");
 
-    // Pega a tabela onde estão os dados (ADMs)
+    // Pega a tabela onde estão os dados dos ADMs
     const tabela = document.getElementById("tabela-adms");
 
-    // Se não encontrar o input ou a tabela, o código para aqui (evita erro)
+    // Se não encontrar o input ou a tabela, interrompe o código
+    // Isso evita erros ao tentar acessar elementos inexistentes
     if (!input || !tabela) return;
 
-    // Pega todas as linhas da tabela (tr)
-    // slice(1) remove a primeira linha (geralmente o cabeçalho)
+    // =========================
+    // CAPTURA DAS LINHAS
+    // =========================
+
+    // Pega todas as linhas da tabela (<tr>)
+    // Array.from → transforma em array real (permite usar map, filter, etc)
+    // slice(1) → remove a primeira linha (cabeçalho)
     const linhas = Array.from(tabela.getElementsByTagName("tr")).slice(1);
 
-    // Pega a div onde serão exibidas as sugestões
+    // =========================
+    // CAIXA DE SUGESTÕES
+    // =========================
+
+    // Pega a div onde serão exibidas as sugestões (já existente no HTML)
     let sugestoesBox = document.getElementById("sugestoes-box");
 
-    // Evento disparado sempre que o usuário digita
+    // =========================
+    // EVENTO DE DIGITAÇÃO
+    // =========================
+
+    // Evento disparado sempre que o usuário digita algo no input
     input.addEventListener("input", function () {
 
-        // Pega o texto digitado e transforma em minúsculo
+        // Pega o texto digitado e converte para minúsculo
+        // Isso evita problemas com comparação (maiúsculas/minúsculas)
         const termo = input.value.toLowerCase();
 
         // Limpa sugestões anteriores
         sugestoesBox.innerHTML = "";
 
-        // Se não tiver termo digitado
+        // Se o campo estiver vazio
         if (!termo) {
 
             // Esconde a caixa de sugestões
@@ -34,28 +54,37 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        // Cria lista de resultados:
+        // =========================
+        // FILTRO DOS DADOS
+        // =========================
+
         const resultados = linhas
 
-            // Pega o conteúdo da segunda coluna (índice 1 = nome)
+            // Para cada linha, pega o conteúdo da segunda coluna (nome do ADM)
             .map(linha => linha.getElementsByTagName("td")[1].textContent)
 
-            // Filtra apenas os nomes que incluem o termo digitado
+            // Filtra apenas os nomes que contêm o termo digitado
             .filter(nome => nome.toLowerCase().includes(termo));
 
-        // Para cada resultado encontrado
+        // =========================
+        // CRIAÇÃO DAS SUGESTÕES
+        // =========================
+
         resultados.forEach(nome => {
 
-            // Cria uma div para mostrar a sugestão
+            // Cria uma div para representar a sugestão
             const div = document.createElement("div");
 
-            // Define o texto da sugestão
+            // Define o texto exibido na sugestão
             div.textContent = nome;
 
-            // Adiciona classe CSS para estilização
+            // Adiciona classe CSS (usada para estilização visual)
             div.classList.add("item-sugestao");
 
-            // Evento ao clicar na sugestão
+            // =========================
+            // EVENTO DE CLIQUE NA SUGESTÃO
+            // =========================
+
             div.onclick = function () {
 
                 // Preenche o input com o nome selecionado
@@ -67,18 +96,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Esconde a caixa de sugestões
                 sugestoesBox.style.display = "none";
 
-                // Procura a linha correspondente na tabela
+                // =========================
+                // BUSCA DA LINHA NA TABELA
+                // =========================
+
                 const linha = linhas.find(
                     l => l.getElementsByTagName("td")[1].textContent === nome
                 );
 
-                // Se encontrar a linha
+                // =========================
+                // SCROLL + DESTAQUE
+                // =========================
+
                 if (linha) {
 
-                    // Faz scroll suave até a linha
+                    // Faz scroll suave até a linha encontrada
                     linha.scrollIntoView({ behavior: "smooth", block: "center" });
 
-                    // Destaca a linha temporariamente
+                    // Destaca a linha com cor amarela
                     linha.style.backgroundColor = "#ffff99";
 
                     // Remove o destaque após 1.5 segundos
@@ -86,11 +121,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             };
 
-            // Adiciona a sugestão na caixa
+            // Adiciona a sugestão dentro da caixa
             sugestoesBox.appendChild(div);
         });
 
-        // Mostra ou esconde a caixa dependendo se há resultados
+        // =========================
+        // CONTROLE DE VISIBILIDADE
+        // =========================
+
+        // Mostra a caixa se houver resultados, senão esconde
         sugestoesBox.style.display = resultados.length > 0 ? "block" : "none";
     });
 });

@@ -1,70 +1,91 @@
-// Espera o HTML carregar completamente antes de executar o script
+// Adiciona um "ouvinte de evento" ao documento inteiro
+// "DOMContentLoaded" garante que o código só será executado
+// depois que TODO o HTML da página for carregado
 document.addEventListener("DOMContentLoaded", function() {
 
-    // Pega o campo de input onde o usuário digita o nome do vendedor
+    // Seleciona o campo de input onde o usuário digita o nome do vendedor
+    // getElementById busca um elemento pelo id no HTML
     const input = document.getElementById("vendedor_input");
 
-    // Pega a div onde serão exibidas as sugestões
+    // Seleciona a div onde as sugestões de vendedores serão exibidas
     const sugestoes = document.getElementById("sugestoes");
 
-    // Converte o JSON armazenado no data-attribute em um array de objetos
-    //  Aqui você usou "clientes", mas na prática são vendedores
+    // Acessa um atributo personalizado "data-clientes" do input (data-attribute)
+    // dataset.clientes retorna esse valor como STRING
+    // JSON.parse converte essa string JSON em um ARRAY de objetos JavaScript
+    // Ex: [{id: 1, nome: "João"}, {id: 2, nome: "Maria"}]
+    // OBS: apesar do nome "clientes", aqui estão sendo usados como vendedores
     const vendedores = JSON.parse(input.dataset.clientes);
 
-    // Evento disparado sempre que o usuário digita algo
+    // Adiciona um evento ao input que dispara toda vez que o usuário digita algo
     input.addEventListener("input", function() {
 
-        // Pega o valor digitado e transforma em minúsculo
+        // Pega o valor atual digitado no input
+        // toLowerCase() transforma tudo em minúsculo para facilitar a comparação
+        // (evita diferença entre maiúsculas/minúsculas)
         let valor = input.value.toLowerCase();
 
-        // Limpa sugestões anteriores
+        // Limpa qualquer sugestão exibida anteriormente
+        // innerHTML = "" remove todo o conteúdo interno da div
         sugestoes.innerHTML = "";
 
-        // Se o campo estiver vazio, não faz nada
+        // Se o campo estiver vazio, interrompe a execução da função
+        // "return" aqui evita processamento desnecessário
         if (valor === "") return;
 
-        // Filtra os vendedores cujo nome contém o texto digitado
+        // Filtra o array de vendedores
+        // filter percorre todos os vendedores e retorna apenas os que atendem a condição
         let filtrados = vendedores.filter(v =>
+
+            // Para cada vendedor:
+            // - Converte o nome para minúsculo
+            // - Verifica se contém o texto digitado (includes)
             v.nome.toLowerCase().includes(valor)
         );
 
-        // Para cada vendedor filtrado, cria uma sugestão
+        // Para cada vendedor que passou no filtro
         filtrados.forEach(vendedor => {
 
-            // Cria uma div para representar a sugestão
+            // Cria dinamicamente uma nova <div> no HTML
             let div = document.createElement("div");
 
-            // Define o texto da sugestão como o nome do vendedor
+            // Define o texto da div como o nome do vendedor
+            // textContent insere texto puro (sem HTML)
             div.textContent = vendedor.nome;
 
-            // Adiciona classe CSS para estilização
+            // Adiciona uma classe CSS chamada "item-sugestao"
+            // Isso permite estilizar cada sugestão via CSS
             div.classList.add("item-sugestao");
 
-            // Evento ao clicar na sugestão
+            // Define o que acontece quando o usuário clicar em uma sugestão
             div.onclick = function() {
 
-                // Preenche o input com o nome selecionado
+                // Preenche o input com o nome do vendedor selecionado
                 input.value = vendedor.nome;
 
-                // Preenche o campo oculto com o ID do vendedor
+                // Define o valor de um campo oculto (hidden)
+                // Isso é útil para enviar o ID real do vendedor para o backend
                 document.getElementById("vendedor_id").value = vendedor.id;
 
-                // Limpa as sugestões
+                // Limpa as sugestões após a seleção
                 sugestoes.innerHTML = "";
             };
 
-            // Adiciona a sugestão na tela
+            // Adiciona a div criada dentro da div de sugestões
+            // appendChild insere o elemento como "filho"
             sugestoes.appendChild(div);
         });
     });
 
-    // Evento global para detectar clique fora do autocomplete
+    // Adiciona um evento global de clique no documento inteiro
     document.addEventListener("click", function(e) {
 
-        // Se o clique não foi dentro do input nem da lista de sugestões
+        // Verifica se o clique NÃO foi dentro do input
+        // E também NÃO foi dentro da div de sugestões
+        // contains() verifica se o elemento clicado está dentro do elemento
         if (!input.contains(e.target) && !sugestoes.contains(e.target)) {
 
-            // Limpa as sugestões (fecha o autocomplete)
+            // Se clicou fora, limpa as sugestões (fecha o autocomplete)
             sugestoes.innerHTML = "";
         }
     });

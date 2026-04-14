@@ -1,96 +1,110 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Espera o HTML carregar completamente antes de executar o código
+    // Isso garante que todos os elementos (input, tabela, etc.) já existam no DOM
 
     const input = document.getElementById("search-input");
-    // Pega o campo de busca onde o usuário digita
+    // Seleciona o campo de busca onde o usuário digita o nome
 
     const tabela = document.getElementById("tabela-vendedores");
-    // Pega a tabela de vendedores
+    // Seleciona a tabela que contém os vendedores
 
     if (!input || !tabela) return;
-    // Se não encontrar o input ou a tabela, para a execução para evitar erro
+    // Se não encontrar o input OU a tabela, interrompe o script
+    // Evita erros como "cannot read property of null"
 
     const linhas = Array.from(tabela.getElementsByTagName("tr")).slice(1); 
     // Pega todas as linhas da tabela (tr)
-    // slice(1) remove o cabeçalho (primeira linha)
+    // Array.from → converte HTMLCollection em array manipulável
+    // slice(1) → remove a primeira linha (cabeçalho da tabela)
 
-    // Cria ou pega o container de sugestões
+    // =========================
+    // CRIAÇÃO DA CAIXA DE SUGESTÕES
+    // =========================
     let sugestoesBox = document.getElementById("sugestoes-box");
-    // Tenta pegar a caixa de sugestões já existente
+    // Tenta pegar a caixa de sugestões caso já exista no HTML
 
     if (!sugestoesBox) {
         sugestoesBox = document.createElement("div");
-        // Cria a caixa de sugestões caso não exista
+        // Cria a caixa de sugestões dinamicamente se não existir
 
         sugestoesBox.id = "sugestoes-box";
-        // Define o ID da caixa
+        // Define um ID para poder reutilizar depois
 
         sugestoesBox.classList.add("lista-sugestoes");
-        // Adiciona uma classe CSS para estilização
+        // Adiciona classe CSS para estilização (cores, hover, etc)
 
         document.body.appendChild(sugestoesBox);
-        // Adiciona a caixa no body da página
+        // Adiciona a caixa diretamente no body da página
     }
 
-    // Aplica estilo básico igual autocomplete cliente
+    // =========================
+    // ESTILIZAÇÃO DINÂMICA DA CAIXA
+    // =========================
     sugestoesBox.style.position = "absolute";
-    // Permite posicionar a caixa em relação à tela
+    // Permite posicionar a caixa livremente na tela (em relação ao viewport)
 
     sugestoesBox.style.background = "white";
-    // Fundo branco
+    // Define fundo branco
 
     sugestoesBox.style.border = "1px solid #ccc";
-    // Borda cinza clara
+    // Adiciona uma borda cinza clara
 
     sugestoesBox.style.maxHeight = "150px";
-    // Altura máxima da caixa
+    // Limita altura máxima da caixa
 
     sugestoesBox.style.overflowY = "auto";
-    // Adiciona scroll vertical se passar do limite
+    // Adiciona scroll vertical se ultrapassar a altura
 
     sugestoesBox.style.display = "none";
     // Começa escondida
 
     sugestoesBox.style.zIndex = "1000";
-    // Garante que fique acima de outros elementos
+    // Garante que fique acima de outros elementos na tela
 
+    // =========================
+    // EVENTO DE DIGITAÇÃO
+    // =========================
     input.addEventListener("input", function () {
-        // Evento disparado sempre que o usuário digita
 
         const termo = input.value.toLowerCase();
-        // Pega o valor digitado e transforma em minúsculo
+        // Pega o texto digitado e converte para minúsculo
+        // Facilita comparação sem diferenciar maiúsculas/minúsculas
 
         sugestoesBox.innerHTML = "";
-        // Limpa as sugestões anteriores
+        // Limpa sugestões anteriores
 
         if (!termo) {
             sugestoesBox.style.display = "none";
-            // Se não tiver nada digitado, esconde a caixa
+            // Se o campo estiver vazio, esconde a caixa
             return;
         }
 
-        // Filtra nomes na tabela
+        // =========================
+        // FILTRO DOS DADOS DA TABELA
+        // =========================
         const resultados = linhas
             .map(linha => linha.getElementsByTagName("td")[1].textContent)
-            // Pega o nome do vendedor (segunda coluna da tabela)
+            // Para cada linha, pega o conteúdo da segunda coluna (nome do vendedor)
 
             .filter(nome => nome.toLowerCase().includes(termo));
-            // Filtra apenas os nomes que contém o texto digitado
+            // Filtra apenas nomes que contêm o termo digitado
 
+        // =========================
+        // CRIAÇÃO DAS SUGESTÕES
+        // =========================
         resultados.forEach(nome => {
-            // Para cada resultado encontrado
 
             const div = document.createElement("div");
-            // Cria uma opção de sugestão
+            // Cria uma nova div para cada sugestão
 
             div.textContent = nome;
             // Define o texto da sugestão
 
             div.classList.add("item-sugestao");
-            // Adiciona classe para estilização
+            // Adiciona classe CSS para estilo (hover, clique, etc)
 
             div.addEventListener("click", function () {
-                // Quando o usuário clica na sugestão
+                // Evento ao clicar em uma sugestão
 
                 input.value = nome;
                 // Preenche o input com o nome selecionado
@@ -99,24 +113,28 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Limpa as sugestões
 
                 sugestoesBox.style.display = "none";
-                // Esconde a caixa
+                // Esconde a caixa de sugestões
 
-                // Rola até a linha correspondente
-                const linha = linhas.find(l => l.getElementsByTagName("td")[1].textContent === nome);
-                // Procura a linha da tabela com esse nome
+                // =========================
+                // SCROLL ATÉ A LINHA NA TABELA
+                // =========================
+                const linha = linhas.find(
+                    l => l.getElementsByTagName("td")[1].textContent === nome
+                );
+                // Procura a linha da tabela correspondente ao nome clicado
 
                 if (linha) {
                     linha.scrollIntoView({ behavior: "smooth", block: "center" });
-                    // Faz a página rolar até a linha
+                    // Faz a página rolar suavemente até a linha
 
                     linha.style.transition = "background 0.5s";
-                    // Aplica transição suave
+                    // Adiciona transição suave na mudança de cor
 
                     linha.style.backgroundColor = "#ffff99";
                     // Destaca a linha com cor amarela
 
                     setTimeout(() => linha.style.backgroundColor = "", 1500);
-                    // Remove o destaque depois de 1.5 segundos
+                    // Remove o destaque após 1.5 segundos
                 }
             });
 
@@ -124,45 +142,51 @@ document.addEventListener("DOMContentLoaded", function () {
             // Adiciona a sugestão na caixa
         });
 
-        // Posiciona o container embaixo do input
+        // =========================
+        // POSICIONAMENTO DA CAIXA
+        // =========================
         if (resultados.length > 0) {
             const rect = input.getBoundingClientRect();
-            // Pega a posição do input na tela
+            // Obtém posição e tamanho do input na tela
 
             sugestoesBox.style.top = rect.bottom + window.scrollY + "px";
-            // Define a posição vertical da caixa
+            // Define posição vertical logo abaixo do input
 
             sugestoesBox.style.left = rect.left + window.scrollX + "px";
-            // Define a posição horizontal da caixa
+            // Define posição horizontal alinhada com o input
 
             sugestoesBox.style.width = rect.width + "px";
-            // Faz a largura da caixa igual ao input
+            // Define a largura igual à do input
 
             sugestoesBox.style.display = "block";
-            // Mostra a caixa
+            // Exibe a caixa de sugestões
         } else {
             sugestoesBox.style.display = "none";
-            // Se não tiver resultados, esconde
+            // Se não houver resultados, esconde a caixa
         }
     });
 
-    // Fecha sugestões ao clicar fora
+    // =========================
+    // FECHAR AO CLICAR FORA
+    // =========================
     document.addEventListener("click", function (e) {
         if (e.target !== input && !sugestoesBox.contains(e.target)) {
-            // Se clicar fora do input e fora da caixa
+            // Se o clique não foi no input nem dentro da caixa
 
             sugestoesBox.style.display = "none";
-            // Esconde a caixa
+            // Esconde a caixa de sugestões
         }
     });
 
-    // Ajusta posição se rolar a página
+    // =========================
+    // AJUSTE AO ROLAR A PÁGINA
+    // =========================
     window.addEventListener("scroll", function () {
         if (sugestoesBox.style.display === "block") {
             // Se a caixa estiver visível
 
             const rect = input.getBoundingClientRect();
-            // Recalcula posição do input
+            // Recalcula a posição do input
 
             sugestoesBox.style.top = rect.bottom + window.scrollY + "px";
             sugestoesBox.style.left = rect.left + window.scrollX + "px";

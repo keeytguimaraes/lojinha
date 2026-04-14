@@ -1,78 +1,100 @@
+# Importa classes e funções principais do Flask
 from flask import Flask, render_template, redirect, url_for, session
-# Importa a classe principal Flask e funções auxiliares:
-# - render_template: renderiza páginas HTML
-# - redirect: redireciona para outra rota
-# - url_for: gera URLs dinamicamente
-# - session: gerencia sessão do usuário (login)
+# - Flask: classe principal para criar a aplicação web
+# - render_template: renderiza arquivos HTML da pasta templates
+# - redirect: redireciona o usuário para outra rota
+# - url_for: gera URLs dinamicamente com base no nome da função/rota
+# - session: armazena dados do usuário entre requisições (ex: login)
 
+# Importa o módulo os (biblioteca padrão do Python)
 import os
-# Biblioteca padrão do Python usada aqui para gerar chave secreta
+# Usado aqui para gerar uma chave secreta aleatória para segurança da aplicação
 
+# Importa o blueprint responsável pela autenticação
 from routes.auth_routes import auth_bp
-# Importa o blueprint de autenticação (login, logout, registro)
+# Esse módulo normalmente contém rotas de login, logout e registro
 
-# Importando blueprints de cada módulo (entidade)
+# Importando blueprints de cada módulo (organização do sistema)
 from routes.cliente_routes import cliente_bp
 from routes.fornecedor_routes import fornecedor_bp
 from routes.vendedor_routes import vendedor_bp
 from routes.estoque_routes import estoque_bp
 from routes.vendas_routes import vendas_bp
 from routes.adm_routes import adm_bp
-# Importa todos os módulos do sistema organizados em blueprints
-# Cada blueprint representa uma parte do sistema (cliente, vendas etc.)
+# Cada blueprint representa um conjunto de rotas relacionadas a uma entidade
+# Exemplo:
+# - cliente_bp → rotas de clientes
+# - vendas_bp → rotas de vendas
+# Isso ajuda a manter o projeto organizado e modular
 
-#  Criando a aplicação Flask
-app = Flask(__name__)
 # Cria a aplicação principal Flask
+app = Flask(__name__)
+# Aqui o Flask inicia a aplicação web
 
+# Define a chave secreta da aplicação
 app.secret_key = os.urandom(24).hex()
-# Define uma chave secreta para sessões
-# - usada para criptografar cookies de sessão
-# - os.urandom(24) gera bytes aleatórios
-# - .hex() transforma em string hexadecimal
+# Explicação detalhada:
+# - os.urandom(24): gera 24 bytes aleatórios (alta segurança)
+# - .hex(): converte esses bytes em uma string hexadecimal
+# Essa chave é usada para:
+# - Proteger sessões (cookies)
+# - Evitar falsificação de dados do usuário
 
-#  Rota da página inicial
+# Define a rota principal do sistema (página inicial)
 @app.route("/")
 def index():
-    # Define a rota principal "/"
+    # Essa função será executada quando o usuário acessar "/"
 
-    # Se não estiver logado, manda para login
+    # Verifica se existe um usuário logado na sessão
+    # 'user_id' geralmente é definido no login
     if 'user_id' not in session:
-        # Verifica se existe usuário logado na sessão
 
+        # Se NÃO estiver logado:
+        # redireciona para a rota de login do blueprint "auth"
         return redirect(url_for('auth.login'))
-        # Se não estiver logado, redireciona para página de login
+        # 'auth.login' → blueprint auth + função login
 
-    # Logado → renderiza home
+    # Se estiver logado:
+    # renderiza (abre) o arquivo index.html
     return render_template("index.html")
-    # Se estiver logado, mostra a página inicial do sistema
 
+# ===================== BLUEPRINTS =====================
+# Blueprint é uma forma de organizar o sistema em módulos separados.
+# Cada módulo (cliente, vendas, estoque, etc.) possui suas próprias rotas.
+# Isso evita deixar o app.py gigante e facilita manutenção.
+# Para ativar um blueprint, usamos: app.register_blueprint()
+# Registrando os blueprints na aplicação principal
+# Isso "ativa" as rotas de cada módulo dentro do sistema
 
-#  Registrando os blueprints sem url_prefix (se não quebra o código)
 app.register_blueprint(cliente_bp)
-# Registra rotas de cliente no app principal
+# Agora todas as rotas de cliente estão disponíveis no app
 
 app.register_blueprint(fornecedor_bp)
-# Registra rotas de fornecedor
+# Ativa rotas relacionadas a fornecedores
 
 app.register_blueprint(vendedor_bp)
-# Registra rotas de vendedor
+# Ativa rotas de vendedores
 
 app.register_blueprint(estoque_bp)
-# Registra rotas de estoque
+# Ativa rotas de controle de estoque
 
 app.register_blueprint(vendas_bp)
-# Registra rotas de vendas
+# Ativa rotas de vendas
 
 app.register_blueprint(adm_bp)
-# Registra rotas de administradores
+# Ativa rotas administrativas
 
 app.register_blueprint(auth_bp)
-# Registra rotas de autenticação (login/logout)
+# Ativa rotas de autenticação (login, logout, etc.)
 
-#  Inicializa a aplicação
+
+# Verifica se este arquivo está sendo executado diretamente
+# (e não importado por outro arquivo)
 if __name__ == "__main__":
-    # Garante que o servidor só rode se esse arquivo for executado diretamente
 
+    # Inicia o servidor Flask
     app.run(debug=True)
-    # Inicia o servidor Flask em modo debug (mostra erros e recarrega automático)
+    # debug=True faz:
+    # - Mostra erros detalhados no navegador
+    # - Reinicia automaticamente o servidor ao salvar alterações
+    # Em produção, isso deve ser False por segurança

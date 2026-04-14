@@ -1,88 +1,109 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Espera todo o HTML carregar antes de executar o script
+    // Evita erros como "elemento não encontrado"
 
+    // =========================
     // MENU LATERAL
+    // =========================
     window.toggleMenu = function () {
-        // Cria uma função global (pode ser chamada no HTML, tipo onclick)
+        // Cria uma função global (fica disponível no escopo window)
+        // Pode ser chamada direto no HTML, por exemplo: onclick="toggleMenu()"
 
         var sidebar = document.getElementById("sidebar");
-        // Pega o elemento da barra lateral
+        // Seleciona o elemento da barra lateral (menu)
 
         var content = document.getElementById("content");
-        // Pega o conteúdo principal da página
+        // Seleciona o conteúdo principal da página
 
         if (sidebar && content) {
-            // Verifica se os dois elementos existem
+            // Verifica se ambos os elementos existem no DOM
+            // Evita erro caso algum ID não esteja presente na página
 
             sidebar.classList.toggle("active");
-            // Adiciona ou remove a classe "active" na sidebar (abre/fecha menu)
+            // Alterna (adiciona/remove) a classe "active" na sidebar
+            // Normalmente usada para abrir/fechar o menu lateral via CSS
 
             content.classList.toggle("shift");
-            // Move o conteúdo principal (geralmente empurra quando o menu abre)
+            // Alterna a classe "shift" no conteúdo principal
+            // Geralmente empurra o conteúdo quando o menu abre
         }
     };
 
-    // PREÇO 
+    // =========================
+    // CONTROLE DE PREÇO (CASAS DECIMAIS)
+    // =========================
     var camposPreco = document.querySelectorAll('input[name="preco"], input[name="preco_venda"]');
-    // Seleciona todos os inputs que tenham name "preco" ou "preco_venda"
+    // Seleciona todos os inputs que tenham:
+    // name="preco" OU name="preco_venda"
+    // Retorna uma NodeList (lista de elementos)
 
     camposPreco.forEach(function(input) {
-        // Para cada campo de preço encontrado
+        // Percorre cada campo de preço encontrado
 
         input.addEventListener("input", function () {
-            // Evento que dispara quando o usuário digita
+            // Evento disparado sempre que o usuário digita algo no campo
 
             var valor = this.value;
-            // Pega o valor digitado
+            // Pega o valor atual digitado no input
 
             if (valor.indexOf(".") !== -1) {
-                // Verifica se existe ponto decimal
+                // Verifica se existe ponto decimal (".")
+                // indexOf retorna -1 se não encontrar
 
                 var partes = valor.split(".");
-                // Divide o valor em duas partes (antes e depois do ponto)
+                // Divide o valor em duas partes:
+                // partes[0] → antes do ponto (inteiro)
+                // partes[1] → depois do ponto (decimal)
 
                 partes[1] = partes[1].slice(0, 2);
                 // Limita a parte decimal para no máximo 2 casas
+                // slice(0, 2) pega apenas os dois primeiros caracteres
 
                 this.value = partes[0] + "." + partes[1];
-                // Reconstrói o valor com apenas 2 casas decimais
+                // Reconstrói o valor juntando inteiro + "." + decimal limitado
             }
         });
     });
 
-    // CPF
+    // =========================
+    // VALIDAÇÃO DE CPF
+    // =========================
     var camposCpf = document.querySelectorAll('input[name="cpf"]');
-    // Seleciona todos os campos de CPF
+    // Seleciona todos os inputs com name="cpf"
 
     camposCpf.forEach(function(input) {
-        // Para cada campo de CPF
+        // Percorre todos os campos de CPF
 
         input.addEventListener("input", function () {
-            // Evento ao digitar
+            // Evento disparado ao digitar
 
             this.value = this.value.replace(/\D/g, "");
-            // Remove tudo que NÃO for número (letras, símbolos, etc)
+            // Remove tudo que NÃO for número
+            // \D → qualquer caractere não numérico
+            // g → aplica para todos os caracteres
 
             this.value = this.value.slice(0, 11);
-            // Limita o CPF a 11 dígitos
+            // Limita o valor a no máximo 11 dígitos (tamanho do CPF)
         });
     });
 
-    // CNPJ
+    // =========================
+    // VALIDAÇÃO DE CNPJ
+    // =========================
     var camposCnpj = document.querySelectorAll('input[name="cnpj"]');
-    // Seleciona todos os campos de CNPJ
+    // Seleciona todos os inputs com name="cnpj"
 
     camposCnpj.forEach(function(input) {
-        // Para cada campo de CNPJ
+        // Percorre todos os campos de CNPJ
 
         input.addEventListener("input", function () {
-            // Evento ao digitar
+            // Evento disparado ao digitar
 
             this.value = this.value.replace(/\D/g, "");
-            // Remove tudo que não for número
+            // Remove qualquer caractere que não seja número
 
             this.value = this.value.slice(0, 14);
-            // Limita o CNPJ a 14 dígitos
+            // Limita o valor a no máximo 14 dígitos (tamanho do CNPJ)
         });
     });
 

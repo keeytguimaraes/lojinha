@@ -3,10 +3,8 @@ from database.connection import get_db
 
 # Função que lista todos os administradores
 def listar_adms():
-    """
-    Lista todos os administradores com dados de login.
-    """
-    
+    #Lista todos os administradores com dados de login.
+
     # Cria a conexão com o banco
     db = get_db()
     
@@ -39,9 +37,7 @@ def listar_adms():
 
 # Função que busca um administrador específico pelo ID
 def buscar_adm_por_id(id):
-    """
-    Busca um administrador pelo ID.
-    """
+    #Busca um administrador pelo ID.
     
     # Cria conexão com o banco
     db = get_db()
