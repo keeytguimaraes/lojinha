@@ -25,12 +25,10 @@ O principal objetivo do projeto é facilitar o controle e a organização de um 
 
 ### Administrador
 Usuário: admin  
-
 Senha: admin123  
 
 ### Vendedor
-Usuário: vendedor 
-
+Usuário: vendedor  
 Senha: vend123  
 
 # Lojinha project
@@ -61,7 +59,6 @@ The main objective of this project is to facilitate inventory management in a pr
 
 ### Administrator
 Username: admin  
-
 Password: admin123  
 
 ### Seller
