@@ -28,7 +28,7 @@ Usuário: admin
 Senha: admin123  
 
 ### Vendedor
-Usuário: vendedor1  
+Usuário: vendedor 
 Senha: vend123  
 
 # Lojinha project
@@ -62,5 +62,5 @@ Username: admin
 Password: admin123  
 
 ### Seller
-Username: vendedor1  
+Username: vendedor
 Password: vend123  

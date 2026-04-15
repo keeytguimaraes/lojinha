@@ -11,7 +11,7 @@ def deletar_adm(id):
     # Cria um cursor, que é o objeto usado para executar comandos SQL no banco
     cursor = db.cursor()
 
-    # 1️⃣ Pegar o login_id do ADM antes de deletar
+    #  Pegar o login_id do ADM antes de deletar
     # Executa uma consulta SQL para buscar o login_id na tabela adm
     # O %s é um placeholder para evitar SQL Injection (boa prática de segurança)
     # (id,) é uma tupla com o valor que será substituído no lugar do %s
