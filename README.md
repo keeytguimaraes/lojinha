@@ -1,4 +1,4 @@
-# Projeto Lojinha
+# Projeto Lojinhainha
 Este projeto consiste no desenvolvimento de um sistema web para controle de estoque de um pequeno comércio (“Lojinhainha”), criado como trabalho escolar. A aplicação foi desenvolvida utilizando Python com o framework Flask e banco de dados MySQL.
 
 O sistema permite o gerenciamento completo de informações essenciais, incluindo cadastro e listagem de clientes, fornecedores, vendedores, produtos em estoque e registro de vendas. Além disso, conta com funcionalidades de exclusão de registros e organização dos dados por meio de relacionamentos entre as tabelas do banco de dados, garantindo maior integridade e consistência das informações.
@@ -29,7 +29,6 @@ Senha: admin123
 
 ### Vendedor
 Usuário: vendedor 
-
 Senha: vend123  
 
 # Lojinha project
@@ -64,5 +63,4 @@ Password: admin123
 
 ### Seller
 Username: vendedor
-
 Password: vend123  
